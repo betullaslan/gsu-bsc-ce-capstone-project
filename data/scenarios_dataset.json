@@ -1,0 +1,5160 @@
+{
+  "features": [
+    "Ticket ID Resolution",
+    "Ticket Creation",
+    "Ticket Dependencies",
+    "Ticket Directory Resolution",
+    "Ticket Edit",
+    "Ticket Links",
+    "Ticket Listing",
+    "Ticket Notes",
+    "Ticket Query",
+    "Ticket Show",
+    "Ticket Status Management",
+    "Ticket Safety",
+    "Ticket User Journeys"
+  ],
+  "feature_count": 13,
+  "scenario_count": 120,
+  "scenarios": [
+    {
+      "id": "SCN-001",
+      "feature": "Ticket ID Resolution",
+      "scenario": "Exact ID match",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"abc-1234\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show abc-1234\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: abc-1234\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-002",
+      "feature": "Ticket ID Resolution",
+      "scenario": "Partial ID match by suffix",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"abc-1234\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show 1234\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: abc-1234\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-003",
+      "feature": "Ticket ID Resolution",
+      "scenario": "Partial ID match by prefix",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"abc-1234\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show abc\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: abc-1234\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-004",
+      "feature": "Ticket ID Resolution",
+      "scenario": "Partial ID match by substring",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"abc-1234\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show c-12\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: abc-1234\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-005",
+      "feature": "Ticket ID Resolution",
+      "scenario": "Ambiguous ID error",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"abc-1234\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"abc-5678\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show abc\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ambiguous ID 'abc' matches multiple tickets\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-006",
+      "feature": "Ticket ID Resolution",
+      "scenario": "Non-existent ID error",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show nonexistent\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-007",
+      "feature": "Ticket ID Resolution",
+      "scenario": "Exact match takes precedence",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"abc\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"abc-1234\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show abc\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: abc\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Short ID ticket\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-008",
+      "feature": "Ticket ID Resolution",
+      "scenario": "ID resolution works with status command",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"test-9999\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket status 9999 in_progress\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-9999\" should have field \"status\" with value \"in_progress\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-009",
+      "feature": "Ticket ID Resolution",
+      "scenario": "ID resolution works with dep command",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"dep-aaaa\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"dep-bbbb\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep aaaa bbbb\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"dep-aaaa\" should have \"bbbb\" in deps",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-010",
+      "feature": "Ticket ID Resolution",
+      "scenario": "ID resolution works with link command",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"link-cccc\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-dddd\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket link cccc dddd\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-cccc\" should have \"link-dddd\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-011",
+      "feature": "Ticket Creation",
+      "scenario": "Create a basic ticket with name",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'My first ticket'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should match a ticket ID pattern",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket file should exist",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-012",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with default name",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should match a ticket ID pattern",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket file should exist",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-013",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with description",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Test ticket' -d 'This is the description'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should contain \"This is the description\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-014",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with type",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Bug ticket' -t bug\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"type\" with value \"bug\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-015",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with priority",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'High priority' -p 0\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"priority\" with value \"0\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-016",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with assignee",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Assigned ticket' -a 'John Doe'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"assignee\" with value \"John Doe\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-017",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with external reference",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'External ticket' --external-ref 'JIRA-123'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"external-ref\" with value \"JIRA-123\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-018",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with parent",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"parent-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Child ticket' --parent parent-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"parent\" with value \"parent-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-019",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with design notes",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Design ticket' --design 'Use microservices'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should contain \"## Design\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should contain \"Use microservices\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-020",
+      "feature": "Ticket Creation",
+      "scenario": "Create a ticket with acceptance criteria",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Story ticket' --acceptance 'Should pass all tests'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should contain \"## Acceptance Criteria\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should contain \"Should pass all tests\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-021",
+      "feature": "Ticket Creation",
+      "scenario": "Ticket has default status open",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'New ticket'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"status\" with value \"open\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-022",
+      "feature": "Ticket Creation",
+      "scenario": "Ticket has default priority 2",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Normal priority'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"priority\" with value \"2\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-023",
+      "feature": "Ticket Creation",
+      "scenario": "Ticket has default type task",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Default type'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"type\" with value \"task\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-024",
+      "feature": "Ticket Creation",
+      "scenario": "Ticket has empty deps by default",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'No deps'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"deps\" with value \"[]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-025",
+      "feature": "Ticket Creation",
+      "scenario": "Ticket has empty links by default",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'No links'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have field \"links\" with value \"[]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-026",
+      "feature": "Ticket Creation",
+      "scenario": "Ticket has created timestamp",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Timestamped'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the created ticket should have a valid created timestamp",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-027",
+      "feature": "Ticket Creation",
+      "scenario": "Tickets directory created on demand",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the tickets directory does not exist",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'First ticket'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the tickets directory should exist",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-028",
+      "feature": "Ticket Dependencies",
+      "scenario": "Add a dependency",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep task-0001 task-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Added dependency: task-0001 -> task-0002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"task-0001\" should have \"task-0002\" in deps",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-029",
+      "feature": "Ticket Dependencies",
+      "scenario": "Add dependency is idempotent",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"task-0001\" depends on \"task-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep task-0001 task-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Dependency already exists\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-030",
+      "feature": "Ticket Dependencies",
+      "scenario": "Remove a dependency",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"task-0001\" depends on \"task-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket undep task-0001 task-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Removed dependency: task-0001 -/-> task-0002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"task-0001\" should not have \"task-0002\" in deps",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-031",
+      "feature": "Ticket Dependencies",
+      "scenario": "Remove non-existent dependency",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket undep task-0001 task-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Dependency not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-032",
+      "feature": "Ticket Dependencies",
+      "scenario": "Add dependency with non-existent ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep task-0001 nonexistent\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-033",
+      "feature": "Ticket Dependencies",
+      "scenario": "Add dependency to non-existent ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep nonexistent task-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-034",
+      "feature": "Ticket Dependencies",
+      "scenario": "View dependency tree",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"task-0001\" depends on \"task-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"task-0002\" depends on \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep tree task-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"task-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"task-0002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"task-0003\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-035",
+      "feature": "Ticket Dependencies",
+      "scenario": "Dependency tree shows status and name",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"task-0001\" depends on \"task-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep tree task-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"[open]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Main task\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Dependency task\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-036",
+      "feature": "Ticket Dependencies",
+      "scenario": "Dependency tree with multiple children",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"task-0001\" depends on \"task-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"task-0001\" depends on \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep tree task-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"task-0002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"task-0003\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-037",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Find tickets in current directory",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"test-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-038",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Find tickets in parent directory",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "I am in subdirectory \"src/components\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"test-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-039",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Find tickets in grandparent directory",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "I am in subdirectory \"src/components/ui\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"test-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-040",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Create ticket initializes in current directory when no parent has tickets",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the tickets directory does not exist",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "I am in subdirectory \"new-project\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'First ticket'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should match a ticket ID pattern",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "tickets directory should exist in current subdirectory",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-041",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Error when no tickets directory for read command",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the tickets directory does not exist",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show nonexistent\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"no .tickets directory found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-042",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Error when no tickets directory in any parent",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the tickets directory does not exist",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "I am in subdirectory \"orphan/deep/path\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ready\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"no .tickets directory found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-043",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "TICKETS_DIR env var takes priority over parent walking",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"parent-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a separate tickets directory exists at \"other-tickets\" with ticket \"other-0001\" named \"Other ticket\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "I am in subdirectory \"src\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls\" with TICKETS_DIR set to \"other-tickets\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"other-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"parent-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-044",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Show command works from subdirectory",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "I am in subdirectory \"src\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show test-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: test-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-045",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Dep command works from subdirectory",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"task-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"task-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "I am in subdirectory \"lib\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep task-0001 task-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Added dependency\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-046",
+      "feature": "Ticket Directory Resolution",
+      "scenario": "Help command works without tickets directory",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the tickets directory does not exist",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket help\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"minimal ticket system\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-047",
+      "feature": "Ticket Edit",
+      "scenario": "Edit in non-TTY mode shows file path",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket edit edit-0001\" in non-TTY mode",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Edit ticket file:\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \".tickets/edit-0001.md\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"edit-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-048",
+      "feature": "Ticket Edit",
+      "scenario": "Edit non-existent ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket edit nonexistent\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"edit-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-049",
+      "feature": "Ticket Edit",
+      "scenario": "Edit with partial ID",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket edit 0001\" in non-TTY mode",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"edit-0001.md\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"edit-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-050",
+      "feature": "Ticket Links",
+      "scenario": "Link two tickets",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket link link-0001 link-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Added 2 link(s) between 2 tickets\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0001\" should have \"link-0002\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0002\" should have \"link-0001\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-051",
+      "feature": "Ticket Links",
+      "scenario": "Link three tickets",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket link link-0001 link-0002 link-0003\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Added 6 link(s) between 3 tickets\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0001\" should have \"link-0002\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0001\" should have \"link-0003\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0002\" should have \"link-0001\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0002\" should have \"link-0003\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0003\" should have \"link-0001\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0003\" should have \"link-0002\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-052",
+      "feature": "Ticket Links",
+      "scenario": "Link is idempotent",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"link-0001\" is linked to \"link-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket link link-0001 link-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"All links already exist\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-053",
+      "feature": "Ticket Links",
+      "scenario": "Unlink two tickets",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"link-0001\" is linked to \"link-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket unlink link-0001 link-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Removed link: link-0001 <-> link-0002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0001\" should not have \"link-0002\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"link-0002\" should not have \"link-0001\" in links",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-054",
+      "feature": "Ticket Links",
+      "scenario": "Unlink non-existent link",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket unlink link-0001 link-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Link not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-055",
+      "feature": "Ticket Links",
+      "scenario": "Link with non-existent ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket link link-0001 nonexistent\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-056",
+      "feature": "Ticket Links",
+      "scenario": "Partial linking adds only new links",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"link-0001\" is linked to \"link-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket link link-0001 link-0002 link-0003\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Added 4 link(s) between 3 tickets\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"link-0003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-057",
+      "feature": "Ticket Listing",
+      "scenario": "List all tickets",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"list-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"list-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"list-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"list-0002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-058",
+      "feature": "Ticket Listing",
+      "scenario": "List with status filter",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"list-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"list-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"list-0002\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls --status=open\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"list-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"list-0002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-059",
+      "feature": "Ticket Listing",
+      "scenario": "List shows dependencies",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"list-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"list-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"list-0001\" depends on \"list-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"<- [list-0002]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-060",
+      "feature": "Ticket Listing",
+      "scenario": "List with no tickets returns nothing",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ls\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the output should be empty",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-061",
+      "feature": "Ticket Listing",
+      "scenario": "Ready shows tickets with no deps and with closed deps",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"ready-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"ready-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"ready-003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"ready-002\" depends on \"ready-003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"ready-003\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ready\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"ready-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"ready-002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-062",
+      "feature": "Ticket Listing",
+      "scenario": "Ready excludes tickets with unclosed deps",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"ready-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"ready-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"ready-001\" depends on \"ready-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ready\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"ready-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"ready-002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-063",
+      "feature": "Ticket Listing",
+      "scenario": "Ready shows tickets when deps are closed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"ready-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"ready-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"ready-001\" depends on \"ready-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"ready-002\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ready\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"ready-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-064",
+      "feature": "Ticket Listing",
+      "scenario": "Ready excludes closed tickets",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"ready-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"ready-001\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket ready\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"ready-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-065",
+      "feature": "Ticket Listing",
+      "scenario": "Blocked shows tickets with unclosed deps",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"block-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-001\" depends on \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket blocked\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"block-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"<- [block-002]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-066",
+      "feature": "Ticket Listing",
+      "scenario": "Blocked excludes tickets with all deps closed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"block-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-001\" depends on \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-002\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket blocked\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"block-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-067",
+      "feature": "Ticket Listing",
+      "scenario": "Blocked excludes closed tickets",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"block-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-001\" depends on \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-001\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket blocked\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"block-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-068",
+      "feature": "Ticket Listing",
+      "scenario": "Blocked shows only unclosed blockers",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"block-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"block-003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-001\" depends on \"block-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-001\" depends on \"block-003\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"block-003\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket blocked\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"<- [block-002]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"block-003\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-069",
+      "feature": "Ticket Listing",
+      "scenario": "Closed excludes open tickets",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"done-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket closed\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"done-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-070",
+      "feature": "Ticket Notes",
+      "scenario": "Add a note to ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket add-note note-0001 'This is my note'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Note added to note-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"note-0001\" should contain \"## Notes\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"note-0001\" should contain \"This is my note\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"note-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-071",
+      "feature": "Ticket Notes",
+      "scenario": "Note has timestamp",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket add-note note-0001 'Timestamped note'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"note-0001\" should contain a timestamp in notes",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"note-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-072",
+      "feature": "Ticket Notes",
+      "scenario": "Add multiple notes",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket add-note note-0001 'First note'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "And",
+          "text": "I run \"ticket add-note note-0001 'Second note'\"",
+          "keyword_inferred": "When",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "ticket \"note-0001\" should contain \"First note\"",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"note-0001\" should contain \"Second note\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"note-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-073",
+      "feature": "Ticket Notes",
+      "scenario": "Add note to ticket that already has notes section",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"note-0001\" has a notes section",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket add-note note-0001 'Additional note'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"note-0001\" should contain \"Additional note\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"note-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-074",
+      "feature": "Ticket Notes",
+      "scenario": "Add note with empty string adds timestamp-only note",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket add-note note-0001 ''\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Note added to note-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"note-0001\" should contain \"## Notes\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"note-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-075",
+      "feature": "Ticket Notes",
+      "scenario": "Add note to non-existent ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket add-note nonexistent 'My note'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"note-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-076",
+      "feature": "Ticket Notes",
+      "scenario": "Add note with partial ID",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket add-note 0001 'Partial ID note'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Note added to note-0001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"note-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-077",
+      "feature": "Ticket Query",
+      "scenario": "Query all tickets as JSONL",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"query-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"query-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket query\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be valid JSONL",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"query-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"query-002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-078",
+      "feature": "Ticket Query",
+      "scenario": "Query with jq filter",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"query-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"query-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"query-002\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket query '.status == \\\"open\\\"'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"query-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"query-002\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-079",
+      "feature": "Ticket Query",
+      "scenario": "Query includes all fields",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"query-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket query\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the JSONL output should have field \"id\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the JSONL output should have field \"status\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the JSONL output should have field \"deps\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the JSONL output should have field \"links\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the JSONL output should have field \"type\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the JSONL output should have field \"priority\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-080",
+      "feature": "Ticket Query",
+      "scenario": "Query with no tickets",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket query\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the output should be empty",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-081",
+      "feature": "Ticket Query",
+      "scenario": "Query arrays are JSON arrays",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"query-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"query-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"query-001\" depends on \"query-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket query\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the JSONL deps field should be a JSON array",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-082",
+      "feature": "Ticket Show",
+      "scenario": "Show displays ticket content",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: show-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"# Test ticket\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-083",
+      "feature": "Ticket Show",
+      "scenario": "Show displays all frontmatter fields",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"status: open\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"deps: []\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"links: []\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"type: task\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"priority: 2\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-084",
+      "feature": "Ticket Show",
+      "scenario": "Show displays blockers section",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"show-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"show-001\" depends on \"show-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"## Blockers\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"show-002 [open] Blocker ticket\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-085",
+      "feature": "Ticket Show",
+      "scenario": "Show hides blockers section when all deps closed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"show-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"show-001\" depends on \"show-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"show-002\" has status \"closed\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"## Blockers\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-086",
+      "feature": "Ticket Show",
+      "scenario": "Show displays blocking section",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"show-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"show-002\" depends on \"show-001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"## Blocking\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"show-002 [open] Blocked\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-087",
+      "feature": "Ticket Show",
+      "scenario": "Show displays children section",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"show-002\" with parent \"show-001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"## Children\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"show-002 [open] Child\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-088",
+      "feature": "Ticket Show",
+      "scenario": "Show displays linked section",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"show-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"show-001\" is linked to \"show-002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"## Linked\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"show-002 [open] Second\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-089",
+      "feature": "Ticket Show",
+      "scenario": "Show enhances parent field with name",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"show-002\" with parent \"show-001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show show-002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"parent: show-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"# Parent ticket\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-090",
+      "feature": "Ticket Show",
+      "scenario": "Show non-existent ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show nonexistent\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-091",
+      "feature": "Ticket Show",
+      "scenario": "Show with partial ID",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"show-001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show 001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: show-001\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-092",
+      "feature": "Ticket Status Management",
+      "scenario": "Set status to in_progress",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket status test-0001 in_progress\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Updated test-0001 -> in_progress\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-0001\" should have field \"status\" with value \"in_progress\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-093",
+      "feature": "Ticket Status Management",
+      "scenario": "Set status to closed",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket status test-0001 closed\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Updated test-0001 -> closed\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-0001\" should have field \"status\" with value \"closed\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-094",
+      "feature": "Ticket Status Management",
+      "scenario": "Set status to open",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"test-0001\" has status \"closed\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket status test-0001 open\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Updated test-0001 -> open\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-0001\" should have field \"status\" with value \"open\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-095",
+      "feature": "Ticket Status Management",
+      "scenario": "Start command sets status to in_progress",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket start test-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Updated test-0001 -> in_progress\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-0001\" should have field \"status\" with value \"in_progress\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-096",
+      "feature": "Ticket Status Management",
+      "scenario": "Close command sets status to closed",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket close test-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Updated test-0001 -> closed\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-0001\" should have field \"status\" with value \"closed\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-097",
+      "feature": "Ticket Status Management",
+      "scenario": "Reopen command sets status to open",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "ticket \"test-0001\" has status \"closed\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket reopen test-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Updated test-0001 -> open\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-0001\" should have field \"status\" with value \"open\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-098",
+      "feature": "Ticket Status Management",
+      "scenario": "Invalid status value",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket status test-0001 invalid\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: invalid status 'invalid'\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"open in_progress closed\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-099",
+      "feature": "Ticket Status Management",
+      "scenario": "Status of non-existent ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket status nonexistent open\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: ticket 'nonexistent' not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-100",
+      "feature": "Ticket Status Management",
+      "scenario": "Status command with partial ID",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket status 0001 in_progress\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"test-0001\" should have field \"status\" with value \"in_progress\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"test-0001\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-101",
+      "feature": "Ticket Safety",
+      "scenario": "Reject path traversal patterns in ticket id",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"safe-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show ../safe-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: invalid ticket id\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-102",
+      "feature": "Ticket Safety",
+      "scenario": "Reject absolute paths in ticket id",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"safe-0002\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: invalid ticket id\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-103",
+      "feature": "Ticket Safety",
+      "scenario": "Reject suspicious ids in link command",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"sec-1000\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket link sec-1000 ../../etc/passwd\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Error: invalid ticket id\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-104",
+      "feature": "Ticket Safety",
+      "scenario": "Help output must not leak environment values",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the environment variable \"API_KEY\" is set to \"super-secret\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket help\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should not contain \"super-secret\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-105",
+      "feature": "Ticket Safety",
+      "scenario": "List completes quickly with many tickets",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "1000 tickets exist",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket list\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the command should complete within \"2s\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-106",
+      "feature": "Ticket Safety",
+      "scenario": "Query completes quickly for JSON output",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "1000 tickets exist",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket query\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the command should complete within \"3s\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-107",
+      "feature": "Ticket Safety",
+      "scenario": "Dependency tree completes quickly for deep chains",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a chain of 200 dependent tickets exists",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep tree\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the command should complete within \"3s\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-108",
+      "feature": "Ticket Safety",
+      "scenario": "Show completes quickly for a single ticket",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"perf-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show perf-0001\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the command should complete within \"500ms\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-109",
+      "feature": "Ticket Safety",
+      "scenario": "Exact id takes precedence over partial match",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"abc\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"abc-1234\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show abc\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"id: abc\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-110",
+      "feature": "Ticket Safety",
+      "scenario": "Adding an existing dependency stays idempotent",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"cmp-0001\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"cmp-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"cmp-0001\" depends on \"cmp-0002\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket dep cmp-0001 cmp-0002\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Dependency already exists\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-111",
+      "feature": "Ticket Safety",
+      "scenario": "Unlinking a non-existent link leaves links empty",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "a ticket exists with ID \"cmp-0003\"",
+          "type": "given"
+        },
+        {
+          "keyword": "And",
+          "text": "a ticket exists with ID \"cmp-0004\"",
+          "keyword_inferred": "Given",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket unlink cmp-0003 cmp-0004\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be \"Link not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"cmp-0003\" should have field \"links\" with value \"[]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "ticket \"cmp-0004\" should have field \"links\" with value \"[]\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-112",
+      "feature": "Ticket Safety",
+      "scenario": "Listing with no tickets stays empty",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "no tickets exist",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket list\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should be empty",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-113",
+      "feature": "Ticket Safety",
+      "scenario": "Resolve exact id in isolation",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I resolve ticket id \"abc-1234\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the resolved ticket id should be \"abc-1234\"",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-114",
+      "feature": "Ticket Safety",
+      "scenario": "Resolve suffix in isolation",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I resolve ticket id \"1234\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the resolved ticket id should be \"abc-1234\"",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-115",
+      "feature": "Ticket Safety",
+      "scenario": "Resolve ambiguous prefix in isolation",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I resolve ticket id \"abc\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the resolution should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the error should contain \"ambiguous\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-116",
+      "feature": "Ticket Safety",
+      "scenario": "Resolve unknown id in isolation",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I resolve ticket id \"nope\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the resolution should fail",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the error should contain \"not found\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-117",
+      "feature": "Ticket User Journeys",
+      "scenario": "Create then show works in a normal flow",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Flow ticket'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should match a ticket ID pattern",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket show last\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Flow ticket\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-118",
+      "feature": "Ticket User Journeys",
+      "scenario": "Help works without tickets directory",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the tickets directory does not exist",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket help\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should contain \"Usage:\"",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-119",
+      "feature": "Ticket User Journeys",
+      "scenario": "Using TICKETS_DIR works in a normal flow",
+      "steps": [
+        {
+          "keyword": "Given",
+          "text": "the environment variable \"TICKETS_DIR\" is set to \"./tmp_tickets\"",
+          "type": "given"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Env dir ticket'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the tickets directory should exist",
+          "keyword_inferred": "Then",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    },
+    {
+      "id": "SCN-120",
+      "feature": "Ticket User Journeys",
+      "scenario": "Create then close then list shows closed ticket",
+      "steps": [
+        {
+          "keyword": "When",
+          "text": "I run \"ticket create 'Close flow ticket'\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "And",
+          "text": "the output should match a ticket ID pattern",
+          "keyword_inferred": "Then",
+          "type": "then"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket close last\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        },
+        {
+          "keyword": "When",
+          "text": "I run \"ticket list --status closed\"",
+          "type": "when"
+        },
+        {
+          "keyword": "Then",
+          "text": "the command should succeed",
+          "type": "then"
+        }
+      ],
+      "background": [
+        {
+          "keyword": "Given",
+          "text": "a clean tickets directory",
+          "type": "given"
+        }
+      ]
+    }
+  ]
+}
