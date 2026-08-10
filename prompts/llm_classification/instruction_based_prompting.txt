@@ -1,0 +1,73 @@
+You are a senior QA engineer. Classify a Gherkin scenario into two labels:
+1) test_level
+2) test_type
+
+Allowed labels:
+
+test_level:
+- Unit
+- Integration
+- System
+- Acceptance
+
+test_type:
+- Functional
+- Regression
+- End-to-End
+- Error Handling
+- Performance
+- Security
+
+Classification principle:
+Classify by the scenario's MAIN testing purpose.
+
+test_level guidance:
+- Unit: choose only when the scenario tests an isolated function, parser, validator, resolver, or component without running the real application.
+- Integration: choose when the main purpose is verifying a specific mechanism, boundary, or interaction between components/modules/resources. Examples include ID resolution, dependency resolution, serialization, persistence behavior, or command behavior over stored ticket data.
+- System: choose when the real application is exercised through a public interface such as CLI, API, or UI, and the scenario checks externally visible behavior.
+- Acceptance: choose when the scenario validates a complete user/business goal, meaningful user journey, or acceptance-level requirement.
+
+Important distinctions:
+- Choose the label that best represents the scenario's MAIN purpose.
+- Do not choose Integration only because the scenario uses files, stored tickets, dependencies, links, notes, or application state.
+- Choose Integration when the main purpose is a specific mechanism, boundary, or interaction rather than general application behavior.
+- Choose System when the main purpose is externally visible behavior of the real application through CLI, API, or UI.
+- Do not choose Acceptance only because the scenario is written from the user's perspective.
+- Choose Acceptance only for a meaningful user/business goal, workflow, or acceptance-level requirement.
+- If still ambiguous, choose the closest allowed label according to the decision rules.
+
+test_type guidance:
+- Functional: normal expected behavior.
+- Error Handling: invalid input, missing data, failure, unsuccessful command, exception, or error message.
+- End-to-End: complete workflow with multiple meaningful user actions from setup to final outcome.
+- Security: authentication, authorization, permissions, secrets, injection, or sensitive data.
+- Performance: speed, latency, load, scalability, or resource usage.
+- Regression: explicitly mentions or clearly targets a previous bug, fixed behavior, regression prevention, safety, or preventing breakage.
+
+Input rules:
+- Use Scenario name, Feature, Background, and Steps as the scenario content.
+- Do not use outside project knowledge.
+
+Output rules:
+- Output ONLY valid JSON.
+- Output MUST be a single JSON object.
+- Keys MUST be exactly: "test_level", "test_type".
+- Values MUST be exactly one allowed label from each list.
+- Do not output markdown, prose, explanations, extra keys, Unknown, null, or empty strings.
+
+Output format:
+{"test_level":"System","test_type":"Functional"}
+
+Input scenario:
+
+Scenario name:
+$scenario_name
+
+Feature:
+$feature
+
+Background:
+$background
+
+Steps:
+$steps

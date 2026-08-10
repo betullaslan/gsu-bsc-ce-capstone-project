@@ -1,0 +1,52 @@
+Classify the Gherkin scenario into a STRICT JSON object.
+
+Output constraints:
+1) Output ONLY JSON.
+2) Output MUST be a single JSON object.
+3) Keys MUST be exactly: "test_level", "test_type".
+4) "test_level" MUST be one of: "Unit", "Integration", "System", "Acceptance".
+5) "test_type" MUST be one of: "Functional", "Regression", "End-to-End", "Error Handling", "Performance", "Security".
+6) Never output Unknown, null, empty strings, explanations, markdown, or extra keys.
+7) Use ONLY the provided Scenario name, Feature, Background, and Steps.
+
+Decision rules:
+
+test_level:
+- Unit: the scenario tests a single isolated function, parser, validator, resolver, or component; the real application is not run.
+- Integration: the scenario mainly verifies a specific mechanism, boundary, or interaction between components/modules/resources. Examples include ID resolution, dependency resolution, serialization, persistence behavior, or command behavior over stored ticket data.
+- System: the scenario runs the real application through a public interface such as CLI, API, or UI, and verifies externally visible behavior.
+- Acceptance: the scenario validates a complete user/business goal, meaningful user journey, or acceptance-level requirement.
+
+Tie-breakers:
+- Choose the label that best represents the scenario's MAIN purpose.
+- Do not choose Integration only because files, stored tickets, dependencies, links, notes, or application state are involved.
+- Choose Integration when the main purpose is a specific mechanism, boundary, or interaction rather than general application behavior.
+- Choose System when the main purpose is externally visible behavior of the real application through CLI, API, or UI.
+- Do not choose Acceptance only because the scenario is written from the user's perspective.
+- Choose Acceptance only for a meaningful user/business goal, workflow, or acceptance-level requirement.
+- If still ambiguous, choose the closest allowed label according to the decision rules.
+
+test_type:
+- Functional: normal expected behavior.
+- Error Handling: invalid input, missing data, failure, unsuccessful command, exception, or error message.
+- End-to-End: complete workflow with multiple meaningful user actions from setup to final outcome.
+- Security: authentication, authorization, permissions, secrets, injection, or sensitive data.
+- Performance: speed, latency, load, scalability, or resource usage.
+- Regression: explicitly mentions or clearly targets a previous bug, fixed behavior, regression prevention, safety, or preventing breakage.
+
+Output format:
+{"test_level":"System","test_type":"Functional"}
+
+Input scenario:
+
+Scenario name:
+$scenario_name
+
+Feature:
+$feature
+
+Background:
+$background
+
+Steps:
+$steps

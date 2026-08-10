@@ -1,0 +1,54 @@
+Strategy: step-by-step
+
+Strategy description:
+- Internally extract Background/Given, When, and Then before writing the final test case.
+- Do NOT output reasoning.
+
+Task:
+Generate a structured test case from the Gherkin scenario below.
+
+Internal process:
+Follow this internal process, but DO NOT output the reasoning:
+1. Background + Given -> Preconditions (keep close to verbatim, one bullet per item).
+2. When -> Test Steps (copy command literals exactly; executable actions only).
+3. Then -> Expected Results (atomic assertions only; preserve literal values).
+
+Common rules:
+- Output ONLY the test case (no intro, no notes).
+- Use EXACT section headers (case-sensitive) on their own lines:
+  Preconditions:
+  Test Steps:
+  Expected Results:
+- Do not write anything on the same line as the headers.
+- Test Steps may contain only the When action(s), plus at most one optional step: "Capture the command output (stdout)" (only if Then asserts on output).
+- Do NOT include verification/assertion phrasing in Test Steps (verify/check/ensure/confirm/assert/expect/output contains/exit code). Put those in Expected Results.
+- Do NOT add directory/environment/execution-context assumptions or helper shell commands (cd, echo, cat/type, touch, redirection >, output.txt, etc.) unless explicitly present in the scenario.
+- Do not capture stderr unless stderr is explicitly mentioned.
+- Avoid ":" label formatting like "Run command:" / "Exit code:"; use plain sentences.
+- Return only as many numbered items as needed. Do not fill unused numbers.
+
+Input scenario:
+
+Scenario:
+{scenario_name}
+
+Background:
+{background}
+
+Given:
+{given_steps}
+
+When:
+{when_steps}
+
+Then:
+{then_steps}
+
+Return format:
+
+Preconditions:
+- ...
+Test Steps:
+1. ...
+Expected Results:
+1. ...

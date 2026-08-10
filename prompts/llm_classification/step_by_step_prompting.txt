@@ -1,0 +1,63 @@
+Classify the following Gherkin scenario along two dimensions and return ONLY JSON.
+
+Reasoning instruction:
+Do the reasoning step-by-step internally, but DO NOT reveal your reasoning.
+Only output the final JSON object.
+
+Internal step-by-step approach:
+1) Identify the main testing scope and map it to test_level.
+2) Identify the main testing intent and map it to test_type.
+3) If multiple labels fit, choose the MAIN purpose.
+4) Ensure the output uses only allowed values.
+
+Allowed values:
+- test_level: Unit | Integration | System | Acceptance
+- test_type: Functional | Regression | End-to-End | Error Handling | Performance | Security
+
+Decision rules:
+
+test_level:
+- Unit only if the scenario tests a single isolated function, validator, parser, resolver, or component without running the real application.
+- Integration if the scenario mainly targets a specific internal mechanism, boundary, or interaction between components. In this project, ID resolution scenarios are Integration when the main purpose is resolving exact, partial, ambiguous, or missing ticket IDs across stored tickets or commands.
+- System if the scenario runs the real application through a public interface such as a CLI command, API endpoint, or UI action and verifies externally visible behavior.
+- For CLI command scenarios, prefer System unless the scenario clearly targets an isolated unit, a specific internal mechanism such as ID resolution, or a business/user acceptance flow.
+- Acceptance only if the scenario validates a complete user/business goal, meaningful user journey, or acceptance requirement. Do not choose Acceptance only because the wording is from the user's perspective.
+
+Important clarifications:
+- Do not classify a scenario as Integration merely because it uses files, tickets, stored state, dependencies, links, notes, or a clean tickets directory.
+- If a scenario runs `ticket ...` and mainly checks command success/failure, output text, or visible application behavior, classify it as System.
+- If a scenario performs a meaningful multi-step user workflow such as create -> show or create -> close -> list, classify it as Acceptance.
+- Scenario name, Feature, Background, and Steps are all part of the scenario content.
+
+test_type:
+- Functional: normal expected behavior.
+- Error Handling: invalid input, missing data, failures, unsuccessful commands, exceptions, or error messages.
+- End-to-End: complete workflow with multiple meaningful user actions from setup to final user-visible outcome.
+- Security: authentication, authorization, permissions, secrets, injection, or sensitive data.
+- Performance: speed, latency, load, scalability, or resource usage.
+- Regression: the scenario name, feature, or steps explicitly mention or clearly target a previous bug, fixed behavior, regression prevention, safety, or preventing breakage.
+
+Output rules:
+- Output ONLY JSON.
+- Output MUST be a single JSON object.
+- Keys MUST be exactly: "test_level", "test_type".
+- Values MUST be selected only from the allowed values.
+- Never output Unknown, null, empty strings, explanations, markdown, extra keys, or labels outside the allowed values.
+- If ambiguous, choose the closest allowed label according to the decision rules.
+
+Output format:
+{"test_level":"System","test_type":"Functional"}
+
+Input scenario:
+
+Scenario name:
+$scenario_name
+
+Feature:
+$feature
+
+Background:
+$background
+
+Steps:
+$steps

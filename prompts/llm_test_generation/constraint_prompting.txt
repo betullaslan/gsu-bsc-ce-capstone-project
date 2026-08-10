@@ -1,0 +1,55 @@
+Strategy: constraint-based
+
+Strategy description:
+- Strictly map scenario information; do not add, omit, merge, or reinterpret.
+- Keep items close to verbatim to preserve dependency relations.
+
+Task:
+Generate a structured software test case from the Gherkin scenario below.
+
+Constraints:
+- Background + Given -> Preconditions (one bullet per item; do not omit or merge).
+- When -> Test Steps (executable actions only; copy command literals exactly).
+  - Do NOT include verification/assertion phrasing in Test Steps (verify/check/ensure/confirm/assert/expect/output contains/exit code). Put those in Expected Results.
+  - Test Steps may contain only the When action(s), plus at most one optional step: "Capture the command output (stdout)" (only if Then asserts on output).
+- Then -> Expected Results (one atomic expected result per Then assertion; do not add or omit assertions).
+- Each expected result must correspond to at least one test step.
+- Do NOT introduce systems, UI actions, APIs, or interactions not present in the scenario.
+- Do NOT invent any context or extra Preconditions (subdirectory/environment/auth) unless explicitly present in Background/Given/When.
+- Do NOT add directory/environment/execution-context assumptions or helper shell commands (cd, echo, cat/type, touch, redirection >, output.txt, etc.) unless explicitly present in the scenario.
+- Avoid ":" label formatting like "Run command:" / "Exit code:"; use plain sentences.
+- Return only as many numbered items as needed. Do not fill unused numbers.
+
+Output format:
+- Output ONLY the test case (no intro, no notes).
+- Use EXACT section headers (case-sensitive) on their own lines:
+  Preconditions:
+  Test Steps:
+  Expected Results:
+- Do not write anything on the same line as the headers.
+
+Input scenario:
+
+Scenario:
+{scenario_name}
+
+Background:
+{background}
+
+Given:
+{given_steps}
+
+When:
+{when_steps}
+
+Then:
+{then_steps}
+
+Return format:
+
+Preconditions:
+- ...
+Test Steps:
+1. ...
+Expected Results:
+1. ...

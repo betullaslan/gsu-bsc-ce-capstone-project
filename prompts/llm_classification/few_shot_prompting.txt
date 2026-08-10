@@ -1,0 +1,145 @@
+Classify the Gherkin scenario into two labels:
+- test_level: Unit | Integration | System | Acceptance
+- test_type: Functional | Regression | End-to-End | Error Handling | Performance | Security
+
+Output constraints:
+1) Output ONLY valid JSON.
+2) Output MUST be a single JSON object.
+3) Keys MUST be exactly: "test_level", "test_type".
+4) Values MUST be selected only from the allowed labels.
+5) Never output Unknown, null, empty strings, explanations, markdown, extra keys, or labels outside the allowed values.
+6) Use ONLY the provided Scenario name, Feature, Background, and Steps.
+
+Decision rules:
+
+test_level:
+- Unit: the scenario tests a single isolated function, parser, validator, resolver, or component; the real application is not run.
+- Integration: the scenario mainly verifies a specific mechanism, boundary, or interaction between components/modules/resources. Examples include ID resolution, dependency resolution, serialization, persistence behavior, or command behavior over stored ticket data.
+- System: the scenario runs the real application through a public interface such as CLI, API, or UI, and verifies externally visible behavior.
+- Acceptance: the scenario validates a complete user/business goal, meaningful user journey, or acceptance-level requirement.
+
+Tie-breakers:
+- Choose the label that best represents the scenario's MAIN purpose.
+- Do not choose Integration only because files, stored tickets, dependencies, links, notes, or application state are involved.
+- Choose Integration when the main purpose is a specific mechanism, boundary, or interaction rather than general application behavior.
+- Choose System when the main purpose is externally visible behavior of the real application through CLI, API, or UI.
+- Do not choose Acceptance only because the scenario is written from the user's perspective.
+- Choose Acceptance only for a meaningful user/business goal, workflow, or acceptance-level requirement.
+- If still ambiguous, choose the closest allowed label according to the decision rules.
+
+test_type:
+- Functional: normal expected behavior.
+- Error Handling: invalid input, missing data, failure, unsuccessful command, exception, or error message.
+- End-to-End: complete workflow with multiple meaningful user actions from setup to final outcome.
+- Security: authentication, authorization, permissions, secrets, injection, or sensitive data.
+- Performance: speed, latency, load, scalability, or resource usage.
+- Regression: explicitly mentions or clearly targets a previous bug, fixed behavior, regression prevention, safety, or preventing breakage.
+
+Examples:
+
+Example 1: Integration + Functional
+Scenario name: Exact ID match
+Feature: Ticket ID Resolution
+Background:
+Given a clean tickets directory
+Steps:
+Given a ticket exists with ID "abc-1234"
+When I run "ticket show abc-1234"
+Then the command should succeed
+And the output should contain "id: abc-1234"
+JSON:
+{"test_level":"Integration","test_type":"Functional"}
+
+Example 2: Integration + Error Handling
+Scenario name: Ambiguous ID error
+Feature: Ticket ID Resolution
+Background:
+Given a clean tickets directory
+Steps:
+Given a ticket exists with ID "abc-1234"
+And a ticket exists with ID "abc-5678"
+When I run "ticket show abc"
+Then the command should fail
+And the output should contain "Error: ambiguous ID 'abc' matches multiple tickets"
+JSON:
+{"test_level":"Integration","test_type":"Error Handling"}
+
+Example 3: System + Functional
+Scenario name: View dependency tree
+Feature: Ticket Dependencies
+Background:
+Given a clean tickets directory
+And a ticket exists with ID "task-0001"
+And a ticket exists with ID "task-0002"
+And a ticket exists with ID "task-0003"
+Steps:
+Given ticket "task-0001" depends on "task-0002"
+And ticket "task-0002" depends on "task-0003"
+When I run "ticket dep tree task-0001"
+Then the command should succeed
+And the output should contain "task-0001"
+And the output should contain "task-0002"
+And the output should contain "task-0003"
+JSON:
+{"test_level":"System","test_type":"Functional"}
+
+Example 4: Acceptance + End-to-End
+Scenario name: Create then show works in a normal flow
+Feature: Ticket User Journeys
+Background:
+Given a clean tickets directory
+Steps:
+When I run "ticket create 'Flow ticket'"
+Then the command should succeed
+And the output should match a ticket ID pattern
+When I run "ticket show last"
+Then the command should succeed
+And the output should contain "Flow ticket"
+JSON:
+{"test_level":"Acceptance","test_type":"End-to-End"}
+
+Example 5: Unit + Functional
+Scenario name: Resolve exact id in isolation
+Feature: Ticket ID Resolver Unit
+Background:
+Given resolver input contains ticket ID "abc-1234"
+Steps:
+When I resolve "abc-1234"
+Then the resolver should return "abc-1234"
+JSON:
+{"test_level":"Unit","test_type":"Functional"}
+
+Example 6: System + Regression
+Scenario name: Unlinking a non-existent link leaves links empty
+Feature: Ticket Safety Regression
+Background:
+Given a clean tickets directory
+Steps:
+Given a ticket exists with ID "task-0001"
+When I run "ticket unlink task-0001 task-9999"
+Then the command should fail
+And the output should contain "not linked"
+When I run "ticket show task-0001"
+Then the command should succeed
+And the output should not contain "task-9999"
+JSON:
+{"test_level":"System","test_type":"Regression"}
+
+Now classify the input scenario.
+
+Output format:
+{"test_level":"System","test_type":"Functional"}
+
+Input scenario:
+
+Scenario name:
+$scenario_name
+
+Feature:
+$feature
+
+Background:
+$background
+
+Steps:
+$steps

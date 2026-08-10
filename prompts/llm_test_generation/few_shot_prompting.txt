@@ -1,0 +1,93 @@
+Strategy: few-shot
+
+Strategy description:
+- Follow the example style and granularity, but do NOT copy example literals.
+- Use ONLY literals present in the current scenario.
+
+Task:
+Generate a structured software test case from the Gherkin scenario below.
+
+Example:
+
+Scenario:
+Exact ID match
+
+Background:
+- a clean tickets directory exists
+
+Given:
+- a ticket exists with ID "test-0001"
+
+When:
+- I run "ticket show test-0001"
+
+Then:
+- the command should succeed
+- the output should contain "id: test-0001"
+
+Test Case:
+
+Preconditions:
+- Clean tickets directory exists
+- Ticket exists with ID "test-0001"
+
+Test Steps:
+1. Run "ticket show test-0001"
+2. Capture the command output (stdout)
+
+Expected Results:
+1. Exit/status code is 0
+2. Output contains "id: test-0001"
+
+---
+
+Instruction:
+Now generate a similar test case for the input scenario.
+
+Common rules:
+- Output ONLY the test case (no intro, no notes).
+- Use EXACT section headers (case-sensitive) on their own lines:
+  Preconditions:
+  Test Steps:
+  Expected Results:
+- Do not write anything on the same line as the headers.
+- Do not include Gherkin labels like "Background:", "Given:", "When:", "Then:" in any section items.
+- Background + Given -> Preconditions (list each as a separate bullet; keep close to verbatim; do not omit or merge; preserve literal values).
+- When -> Test Steps (executable actions only; copy command literals exactly).
+  - Test Steps may contain only the When action(s), plus at most one optional step: "Capture the command output (stdout)" (only if Then asserts on output).
+  - Do NOT include verification/assertion phrasing in Test Steps (verify/check/ensure/confirm/assert/expect/output contains/exit code). Put those in Expected Results.
+  - Do NOT add directory/environment/execution-context assumptions or helper shell commands (cd, echo, cat/type, touch, redirection >, output.txt, etc.) unless explicitly present in the scenario.
+- Then -> Expected Results (atomic assertions only; one check per line; preserve all literal values; avoid vague phrases like "as expected").
+- Avoid ":" label formatting like "Run command:" / "Exit code:"; use plain sentences.
+- Return only as many numbered items as needed. Do not fill unused numbers.
+- Do not capture stderr unless stderr is explicitly mentioned.
+
+Few-shot rules:
+- Follow the example phrasing closely (style and granularity), but replace values with the current scenario's literals.
+- Do NOT copy any example literal values.
+
+Input scenario:
+
+Scenario:
+{scenario_name}
+
+Background:
+{background}
+
+Given:
+{given_steps}
+
+When:
+{when_steps}
+
+Then:
+{then_steps}
+
+Return format:
+
+Preconditions:
+- ...
+Test Steps:
+1. ...
+Expected Results:
+1. ...
