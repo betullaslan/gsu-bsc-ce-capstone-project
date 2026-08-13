@@ -1,0 +1,196 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-083",
+  "scenario_name": "Show displays all frontmatter fields",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 28.409155,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"show-001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"status: open\"",
+          "Output contains \"deps: []\"",
+          "Output contains \"links: []\"",
+          "Output contains \"type: task\"",
+          "Output contains \"priority: 2\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.943,
+          "specificity": 0.889,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.986
+        },
+        "final_score": 0.914
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 25.478445,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"show-001\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains \"status: open\"",
+          "Output contains \"deps: []\"",
+          "Output contains \"links: []\"",
+          "Output contains \"type: task\"",
+          "Output contains \"priority: 2\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 0.943,
+          "specificity": 0.889,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.986
+        },
+        "final_score": 0.939
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 28.769435,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"show-001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"status: open\"",
+          "Output contains \"deps: []\"",
+          "Output contains \"links: []\"",
+          "Output contains \"type: task\"",
+          "Output contains \"priority: 2\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.943,
+          "specificity": 0.889,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.986
+        },
+        "final_score": 0.913
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.160476,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"show-001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0 and output contains \"show-001\"",
+          "Output contains \"status: open\"",
+          "Output contains \"deps: []\"",
+          "Output contains \"links: []\"",
+          "Output contains \"type: task\"",
+          "Output contains \"priority: 2\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 1.0,
+          "specificity": 0.875,
+          "hallucination": 1.0,
+          "semantic_coverage": 1.0
+        },
+        "final_score": 0.922
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 28.988292,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"show-001\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"status: open\"",
+          "Output contains \"deps: []\"",
+          "Output contains \"links: []\"",
+          "Output contains \"type: task\"",
+          "Output contains \"priority: 2\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.943,
+          "specificity": 0.889,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.986
+        },
+        "final_score": 0.913
+      }
+    }
+  ]
+}

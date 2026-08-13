@@ -1,0 +1,216 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-028",
+  "scenario_name": "Add a dependency",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 41.462731,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"task-0001\" exists",
+          "A ticket with ID \"task-0002\" exists",
+          "A ticket with ID \"task-0003\" exists"
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Ticket \"task-0001\" has \"task-0002\" in deps"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.83
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 46.869752,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added dependency: task-0001 -> task-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.831
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 42.887357,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Added dependency: task-0001 -> task-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.859
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 33.373009,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"task-0001\" exists",
+          "A ticket with ID \"task-0002\" exists",
+          "A ticket with ID \"task-0003\" exists"
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Added dependency: task-0001 -> task-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.869
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 31.675298,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Added dependency: task-0001 -> task-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.872
+      }
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-069",
+  "scenario_name": "Closed excludes open tickets",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 28.08362,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"done-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket closed\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"id: done-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.882
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 26.185027,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"done-0001\""
+        ],
+        "steps": [
+          "I run \"ticket closed\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"done-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.885
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 22.381797,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"done-0001\""
+        ],
+        "steps": [
+          "I run \"ticket closed\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: done-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.893
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 24.402444,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"done-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket closed\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: done-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.888
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 22.913856,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"done-0001\""
+        ],
+        "steps": [
+          "I run \"ticket closed\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: done-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.891
+      }
+    }
+  ]
+}

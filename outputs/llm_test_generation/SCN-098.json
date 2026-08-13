@@ -1,0 +1,207 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-098",
+  "scenario_name": "Invalid status value",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 32.335481,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket status test-0001 invalid\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid status 'invalid'\"",
+          "Output does not contain \"open in_progress closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.861
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 33.305273,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket status test-0001 invalid\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid status 'invalid'\"",
+          "Output contains \"open in_progress closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.86
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 26.791945,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket status test-0001 invalid\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid status 'invalid'\"",
+          "Output contains \"open in_progress closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.869
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 28.957046,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket status test-0001 invalid\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid status 'invalid'\"",
+          "Output contains \"open in_progress closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.866
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 26.044518,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket status test-0001 invalid\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid status 'invalid'\"",
+          "Output contains \"open in_progress closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.871
+      }
+    }
+  ]
+}

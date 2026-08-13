@@ -1,0 +1,197 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-008",
+  "scenario_name": "ID resolution works with status command",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 32.405911,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-9999\" exists"
+        ],
+        "steps": [
+          "Run command: \"ticket status 9999 in_progress\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-9999\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.9
+        },
+        "final_score": 0.803
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 22.817888,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-9999\""
+        ],
+        "steps": [
+          "I run \"ticket status 9999 in_progress\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Ticket \"test-9999\" has field \"status\" with value \"in_progress\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 1.0,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.913
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 25.703119,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-9999\" exists"
+        ],
+        "steps": [
+          "Run command: `ticket status 9999 in_progress`",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-9999\"",
+          "Output contains \"status: in_progress\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 0.6,
+          "semantic_coverage": 0.467
+        },
+        "final_score": 0.698
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 27.857115,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-9999\" exists"
+        ],
+        "steps": [
+          "I run \"ticket status 9999 in_progress\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-9999\"",
+          "Ticket \"test-9999\" has field \"status\" with value \"in_progress\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.908
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 25.954463,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-9999\""
+        ],
+        "steps": [
+          "I run \"ticket status 9999 in_progress\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-9999\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.9
+        },
+        "final_score": 0.811
+      }
+    }
+  ]
+}

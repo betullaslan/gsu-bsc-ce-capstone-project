@@ -1,0 +1,192 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-056",
+  "scenario_name": "Partial linking adds only new links",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 38.508668,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002 link-0003\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 4 link(s) between 3 tickets\"",
+          "Output contains \"link-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.6,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.809
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 46.815793,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002 link-0003\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 4 link(s) between 3 tickets\"",
+          "Output contains \"link-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.6,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.801
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 41.682632,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "Ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002 link-0003\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 4 link(s) between 3 tickets\"",
+          "Output contains \"link-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.836
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 32.383835,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002 link-0003\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 4 link(s) between 3 tickets\"",
+          "Output contains \"link-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.6,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.817
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 41.144573,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002 link-0003\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 4 link(s) between 3 tickets\"",
+          "Output contains \"link-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.6,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.806
+      }
+    }
+  ]
+}

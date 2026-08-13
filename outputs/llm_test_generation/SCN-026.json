@@ -1,0 +1,176 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-026",
+  "scenario_name": "Ticket has created timestamp",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 25.611056,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Timestamped'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has a valid created timestamp"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.375,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.833
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 43.13586,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket has created timestamp"
+        ],
+        "steps": [
+          "I run \"ticket create 'Timestamped'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The command should succeed",
+          "The created ticket should have a valid created timestamp"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.3,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.804
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 27.900183,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "No existing ticket with name 'Timestamped'"
+        ],
+        "steps": [
+          "I run \"ticket create 'Timestamped'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket should have a valid created timestamp"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.375,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.829
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 29.801943,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Timestamped'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has a valid created timestamp"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.375,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.827
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 24.006736,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Timestamped'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has a valid created timestamp"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.375,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.836
+      }
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-080",
+  "scenario_name": "Query with no tickets",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 22.368419,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output is empty"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.839
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 25.103201,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "Clean tickets directory exists",
+          "Ticket query command should return no results"
+        ],
+        "steps": [
+          "Run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output is empty"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.834
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 26.263056,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "No existing tickets in the tickets directory"
+        ],
+        "steps": [
+          "Run \"ticket query\" in the terminal",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output should be empty"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.832
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.920537,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output should be empty"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.824
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 22.748802,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output should be empty"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.838
+      }
+    }
+  ]
+}

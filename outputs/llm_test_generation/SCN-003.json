@@ -1,0 +1,172 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-003",
+  "scenario_name": "Partial ID match by prefix",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 31.622475,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"abc-1234\""
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: abc-1234\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.878
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 22.49966,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"abc-1234\""
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains \"id: abc-1234\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 1.0,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.913
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 23.66777,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"abc-1234\""
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: abc-1234\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.89
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 25.919441,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"abc-1234\" exists"
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: abc-1234\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.886
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 24.171149,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"abc-1234\""
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: abc-1234\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.889
+      }
+    }
+  ]
+}

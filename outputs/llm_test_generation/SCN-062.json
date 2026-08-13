@@ -1,0 +1,187 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-062",
+  "scenario_name": "Ready excludes tickets with unclosed deps",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 35.603784,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "A ticket exists with ID \"ready-002\"",
+          "Ticket \"ready-001\" depends on \"ready-002\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-002\"",
+          "Output contains \"ready-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.88
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 43.924888,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"ready-001\"",
+          "A ticket exists with ID \"ready-002\"",
+          "Ticket \"ready-001\" depends on \"ready-002\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"id: ready-001\"",
+          "Output contains \"id: ready-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.902
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 37.465608,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "A ticket exists with ID \"ready-002\"",
+          "Ticket \"ready-001\" depends on \"ready-002\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-002\"",
+          "Output does not contain \"id: ready-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.908
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 30.61389,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"ready-001\" exists",
+          "A ticket with ID \"ready-002\" exists",
+          "The ticket \"ready-001\" depends on the ticket \"ready-002\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-002\"",
+          "Output does not contain \"id: ready-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.917
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 35.768178,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "A ticket exists with ID \"ready-002\"",
+          "Ticket \"ready-001\" depends on \"ready-002\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\"",
+          "Output does not contain \"ready-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.91
+      }
+    }
+  ]
+}

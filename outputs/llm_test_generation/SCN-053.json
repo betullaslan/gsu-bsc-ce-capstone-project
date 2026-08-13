@@ -1,0 +1,250 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-053",
+  "scenario_name": "Unlink two tickets",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 57.98439,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket unlink link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: link-0001\"",
+          "Ticket \"link-0001\" should not have \"link-0002\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.55,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.808
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 70.790379,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket unlink link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Removed link: link-0001 <-> link-0002\"",
+          "Ticket \"link-0001\" should not have \"link-0002\" in links",
+          "Ticket \"link-0002\" should not have \"link-0001\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "redundant_expected_result",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate expected result"
+          },
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 0.833,
+          "semantic_coverage": 0.725
+        },
+        "final_score": 0.758
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 61.182675,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket unlink link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: link-0001\"",
+          "Ticket \"link-0001\" should not have \"link-0002\" in links",
+          "Ticket \"link-0002\" should not have \"link-0001\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "redundant_expected_result",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate expected result"
+          },
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.55,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.925
+        },
+        "final_score": 0.816
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 53.432513,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket unlink link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: link-0001\"",
+          "Output contains \"Removed link: link-0001 <-> link-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.717
+        },
+        "final_score": 0.753
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 60.455038,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\"",
+          "ticket \"link-0001\" is linked to \"link-0002\""
+        ],
+        "steps": [
+          "I run \"ticket unlink link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: link-0001\"",
+          "Ticket \"link-0001\" should not have \"link-0002\" in links",
+          "Ticket \"link-0002\" should not have \"link-0001\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "redundant_expected_result",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate expected result"
+          },
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.55,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.925
+        },
+        "final_score": 0.816
+      }
+    }
+  ]
+}

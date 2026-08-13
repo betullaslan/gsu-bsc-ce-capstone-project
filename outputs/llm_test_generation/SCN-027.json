@@ -1,0 +1,203 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-027",
+  "scenario_name": "Tickets directory created on demand",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 26.180972,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "The system has a clean tickets directory",
+          "The tickets directory does not exist",
+          "a clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'First ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.711
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 25.363932,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The tickets directory does not exist"
+        ],
+        "steps": [
+          "I run \"ticket create 'First ticket'\"",
+          "I capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains \"tickets created\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 0.75,
+          "semantic_coverage": 0.7
+        },
+        "final_score": 0.773
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 25.768109,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "The tickets directory does not exist"
+        ],
+        "steps": [
+          "I run \"ticket create 'First ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.741
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 21.745523,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The tickets directory does not exist"
+        ],
+        "steps": [
+          "I run \"ticket create 'First ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.749
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 25.164326,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "The tickets directory does not exist"
+        ],
+        "steps": [
+          "I run \"ticket create 'First ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.742
+      }
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-099",
+  "scenario_name": "Status of non-existent ticket",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 31.387911,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket status nonexistent open\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.829
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 38.75527,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket status nonexistent open\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.821
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 24.808253,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket status nonexistent open\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.839
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 27.250743,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket status nonexistent open\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.835
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 25.315985,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket status nonexistent open\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.838
+      }
+    }
+  ]
+}

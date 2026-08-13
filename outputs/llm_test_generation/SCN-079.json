@@ -1,0 +1,212 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-079",
+  "scenario_name": "Query includes all fields",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 31.300876,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"query-001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "Output contains \"status: \"",
+          "Output contains \"deps: \"",
+          "Output contains \"links: \"",
+          "Output contains \"type: \"",
+          "Output contains \"priority: \""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.943,
+          "specificity": 0.889,
+          "hallucination": 0.444,
+          "semantic_coverage": 0.486
+        },
+        "final_score": 0.729
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 23.923729,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"query-001\""
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains field \"id\"",
+          "Output contains field \"status\"",
+          "Output contains field \"deps\"",
+          "Output contains field \"links\"",
+          "Output contains field \"type\"",
+          "Output contains field \"priority\"",
+          "Output contains \"query-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 0.95,
+          "specificity": 0.9,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.988
+        },
+        "final_score": 0.943
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 30.329804,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"query-001\""
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "Output contains \"status:\"",
+          "Output contains \"deps:\"",
+          "Output contains \"links:\"",
+          "Output contains \"type:\"",
+          "Output contains \"priority:\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.943,
+          "specificity": 0.889,
+          "hallucination": 0.444,
+          "semantic_coverage": 0.486
+        },
+        "final_score": 0.73
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 33.873601,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"query-001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "The JSONL output has field \"id\"",
+          "The JSONL output has field \"status\"",
+          "The JSONL output has field \"deps\"",
+          "The JSONL output has field \"links\"",
+          "The JSONL output has field \"type\"",
+          "The JSONL output has field \"priority\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.95,
+          "specificity": 0.9,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.988
+        },
+        "final_score": 0.938
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 31.438644,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"query-001\""
+        ],
+        "steps": [
+          "I run \"ticket query\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "The JSONL output has field \"id\"",
+          "The JSONL output has field \"status\"",
+          "The JSONL output has field \"deps\"",
+          "The JSONL output has field \"links\"",
+          "The JSONL output has field \"type\"",
+          "The JSONL output has field \"priority\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.95,
+          "specificity": 0.9,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.988
+        },
+        "final_score": 0.941
+      }
+    }
+  ]
+}

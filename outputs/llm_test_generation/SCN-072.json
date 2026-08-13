@@ -1,0 +1,182 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-072",
+  "scenario_name": "Add multiple notes",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 16.692674,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'First note'\"",
+          "I run \"ticket add-note note-0001 'Second note'\""
+        ],
+        "expected_results": [
+          "Output contains \"note-0001\"",
+          "Output contains \"First note\"",
+          "Output contains \"Second note\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 0.9,
+          "specificity": 1.0,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.945
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 22.475745,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'First note'\"",
+          "I run \"ticket add-note note-0001 'Second note'\""
+        ],
+        "expected_results": [
+          "Output contains \"note-0001\"",
+          "Output contains \"First note\"",
+          "Output contains \"Second note\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 0.9,
+          "specificity": 1.0,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.932
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 17.040069,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'First note'\"",
+          "I run \"ticket add-note note-0001 'Second note'\""
+        ],
+        "expected_results": [
+          "Output contains \"note-0001\"",
+          "Output contains \"First note\"",
+          "Output contains \"Second note\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 0.9,
+          "specificity": 1.0,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.944
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 18.70475,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"note-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'First note'\"",
+          "I run \"ticket add-note note-0001 'Second note'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Output contains \"note-0001\" and exit/status code is 0",
+          "Output contains \"First note\"",
+          "Output contains \"Second note\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 1.0,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 1.0
+        },
+        "final_score": 0.94
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 17.301796,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'First note'\"",
+          "I run \"ticket add-note note-0001 'Second note'\""
+        ],
+        "expected_results": [
+          "Output contains \"note-0001\"",
+          "Output contains \"First note\"",
+          "Output contains \"Second note\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 0.9,
+          "specificity": 1.0,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.943
+      }
+    }
+  ]
+}

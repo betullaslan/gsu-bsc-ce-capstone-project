@@ -1,0 +1,195 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-044",
+  "scenario_name": "Show command works from subdirectory",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 31.411066,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "Run command: \"ticket show test-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.882
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 29.581225,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "I run \"ticket show test-0001\" from subdirectory \"src\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "unsupported_action_step",
+            "severity": "high",
+            "message": "Test step includes an action not implied by the scenario (e.g., update directory, open editor)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.859
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 32.345758,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "I run \"ticket show test-0001\" from subdirectory \"src\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "unsupported_action_step",
+            "severity": "high",
+            "message": "Test step includes an action not implied by the scenario (e.g., update directory, open editor)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.856
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 25.926698,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "I am in subdirectory \"src\"",
+          "a ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "Run command: ticket show test-0001",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 0.75,
+          "semantic_coverage": 0.7
+        },
+        "final_score": 0.748
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 24.83217,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "I run \"ticket show test-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.893
+      }
+    }
+  ]
+}

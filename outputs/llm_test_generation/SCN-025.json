@@ -1,0 +1,174 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-025",
+  "scenario_name": "Ticket has empty links by default",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 25.58767,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'No links'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket should have field \"links\" with value \"[]\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.893
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 27.965846,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The ticket has empty links by default"
+        ],
+        "steps": [
+          "I run \"ticket create 'No links'\"",
+          "I capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains \"links: []\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 0.75,
+          "semantic_coverage": 0.7
+        },
+        "final_score": 0.776
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 26.832696,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'No links'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket should have field \"links\" with value \"[]\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.89
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.407209,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'No links'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket should have field \"links\" with value \"[]\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.883
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 26.539812,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'No links'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket should have field \"links\" with value \"[]\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.891
+      }
+    }
+  ]
+}

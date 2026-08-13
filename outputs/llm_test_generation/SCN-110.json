@@ -1,0 +1,187 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-110",
+  "scenario_name": "Adding an existing dependency stays idempotent",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 36.270718,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"cmp-0001\"",
+          "A ticket exists with ID \"cmp-0002\"",
+          "Ticket \"cmp-0001\" depends on \"cmp-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep cmp-0001 cmp-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: cmp-0001\"",
+          "Output contains \"Dependency already exists\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.845
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 32.354511,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"cmp-0001\"",
+          "A ticket exists with ID \"cmp-0002\"",
+          "Ticket \"cmp-0001\" depends on \"cmp-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep cmp-0001 cmp-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Dependency already exists\"",
+          "Output contains \"cmp-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.82
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 29.070318,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"cmp-0001\"",
+          "A ticket exists with ID \"cmp-0002\"",
+          "Ticket \"cmp-0001\" depends on \"cmp-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep cmp-0001 cmp-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: cmp-0001\"",
+          "Output contains \"Dependency already exists\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.855
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.83119,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"cmp-0001\" exists",
+          "A ticket with ID \"cmp-0002\" exists",
+          "The ticket \"cmp-0001\" depends on the ticket \"cmp-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep cmp-0001 cmp-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: cmp-0001\"",
+          "Output contains \"Dependency already exists\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.851
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 27.867504,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"cmp-0001\"",
+          "A ticket exists with ID \"cmp-0002\"",
+          "Ticket \"cmp-0001\" depends on \"cmp-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep cmp-0001 cmp-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: cmp-0001\"",
+          "Output contains \"Dependency already exists\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.857
+      }
+    }
+  ]
+}

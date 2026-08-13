@@ -1,0 +1,189 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-038",
+  "scenario_name": "Find tickets in parent directory",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 45.646465,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src/components\""
+        ],
+        "steps": [
+          "Navigate to the parent directory of \"src/components\"",
+          "Run \"ticket ls\" from within \"src/components\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 1.0,
+          "hallucination": 0.75,
+          "semantic_coverage": 0.45
+        },
+        "final_score": 0.705
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 39.777388,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src/components\""
+        ],
+        "steps": [
+          "I run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.874
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 26.015769,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src/components\""
+        ],
+        "steps": [
+          "I run \"ticket ls\" from the current directory",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.891
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 25.232586,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "I am in subdirectory \"src/components\"",
+          "a ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "Run command: ticket ls",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 0.75,
+          "semantic_coverage": 0.7
+        },
+        "final_score": 0.713
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 31.796214,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\"",
+          "I am in subdirectory \"src/components\""
+        ],
+        "steps": [
+          "I run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.882
+      }
+    }
+  ]
+}

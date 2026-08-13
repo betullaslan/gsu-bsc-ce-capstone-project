@@ -1,0 +1,180 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-019",
+  "scenario_name": "Create a ticket with design notes",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 23.264981,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Design ticket' --design 'Use microservices'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket contains \"## Design\"",
+          "The created ticket contains \"Use microservices\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.917
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 45.419845,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket does not exist with ID \"test-0001\""
+        ],
+        "steps": [
+          "Run \"ticket create 'Design ticket' --design 'Use microservices'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\"",
+          "Output contains \"## Design\"",
+          "Output contains \"Use microservices\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 0.833,
+          "semantic_coverage": 0.725
+        },
+        "final_score": 0.805
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 26.850114,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Design ticket' --design 'Use microservices'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket contains \"## Design\"",
+          "The created ticket contains \"Use microservices\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.91
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 39.664569,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Design ticket' --design 'Use microservices'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket contains \"## Design\"",
+          "The created ticket contains \"Use microservices\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.896
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 25.051748,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Design ticket' --design 'Use microservices'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket contains \"## Design\"",
+          "The created ticket contains \"Use microservices\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.913
+      }
+    }
+  ]
+}

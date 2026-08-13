@@ -1,0 +1,250 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-102",
+  "scenario_name": "Reject absolute paths in ticket id",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 40.495451,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"safe-0002\""
+        ],
+        "steps": [
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid ticket id\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "min_test_steps_not_met",
+            "severity": "low",
+            "message": "Minimum test steps not met"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.5,
+          "specificity": 0.333,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.695
+        },
+        "final_score": 0.641
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 44.366006,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"safe-0002\""
+        ],
+        "steps": [
+          "Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid ticket id\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "redundant_step",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate test step"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.5,
+          "specificity": 0.25,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.695
+        },
+        "final_score": 0.625
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 36.91629,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"safe-0002\""
+        ],
+        "steps": [
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid ticket id\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "min_test_steps_not_met",
+            "severity": "low",
+            "message": "Minimum test steps not met"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.5,
+          "specificity": 0.333,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.695
+        },
+        "final_score": 0.645
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 36.468982,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"safe-0002\" exists"
+        ],
+        "steps": [
+          "Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid ticket id\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "redundant_step",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate test step"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.5,
+          "specificity": 0.25,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.695
+        },
+        "final_score": 0.634
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 34.374319,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"safe-0002\""
+        ],
+        "steps": [
+          "Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: invalid ticket id\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "redundant_step",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate test step"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.5,
+          "specificity": 0.25,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.695
+        },
+        "final_score": 0.637
+      }
+    }
+  ]
+}

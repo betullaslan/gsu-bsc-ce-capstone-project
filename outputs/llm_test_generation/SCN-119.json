@@ -1,0 +1,247 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-119",
+  "scenario_name": "Using TICKETS_DIR works in a normal flow",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 39.767046,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "The environment variable \"TICKETS_DIR\" is set to \"./tmp_tickets\"",
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Env dir ticket'\" with Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory should exist"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.719
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 42.32775,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "The environment variable \"TICKETS_DIR\" is set to \"./tmp_tickets\""
+        ],
+        "steps": [
+          "I run \"ticket create 'Env dir ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Created ticket: Env dir ticket in ./tmp_tickets\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 0.75,
+          "semantic_coverage": 0.7
+        },
+        "final_score": 0.763
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 35.145526,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "The environment variable \"TICKETS_DIR\" is set to \"./tmp_tickets\""
+        ],
+        "steps": [
+          "I run \"ticket create 'Env dir ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory should exist"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.724
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 35.932238,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The environment variable \"TICKETS_DIR\" is set to \"./tmp_tickets\""
+        ],
+        "steps": [
+          "I run \"ticket create 'Env dir ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory should exist"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.723
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 42.260557,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "The environment variable \"TICKETS_DIR\" is set to \"./tmp_tickets\""
+        ],
+        "steps": [
+          "I run \"ticket create 'Env dir ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The tickets directory should exist"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          },
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.67
+        },
+        "final_score": 0.716
+      }
+    }
+  ]
+}

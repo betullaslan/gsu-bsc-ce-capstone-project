@@ -1,0 +1,178 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-064",
+  "scenario_name": "Ready excludes closed tickets",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 29.648793,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "Ticket \"ready-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.877
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 20.583898,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"ready-001\" and status \"closed\" exists"
+        ],
+        "steps": [
+          "Run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"ready-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 1.0,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.913
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 30.738757,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "Ticket \"ready-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\"",
+          "Output does not contain \"closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.9
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 25.764558,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"ready-001\" exists",
+          "ticket \"ready-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\"",
+          "The output does not contain \"closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.877
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 29.856228,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "Ticket \"ready-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.877
+      }
+    }
+  ]
+}

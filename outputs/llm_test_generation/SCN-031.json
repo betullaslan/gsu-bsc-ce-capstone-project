@@ -1,0 +1,212 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-031",
+  "scenario_name": "Remove non-existent dependency",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 34.755317,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Dependency not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.831
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 40.882983,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Dependency not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.824
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 35.056935,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Dependency not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.83
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 28.839645,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"task-0001\" exists",
+          "A ticket with ID \"task-0002\" exists",
+          "A ticket with ID \"task-0003\" exists"
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "The output contains \"Dependency not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.839
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 35.587283,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "The output should be \"Dependency not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.83
+      }
+    }
+  ]
+}

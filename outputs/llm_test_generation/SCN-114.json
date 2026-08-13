@@ -1,0 +1,185 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-114",
+  "scenario_name": "Resolve suffix in isolation",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 22.890467,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"1234\"",
+          "I verify that the resolved ticket ID is indeed \"abc-1234\""
+        ],
+        "expected_results": [
+          "The resolved ticket ID is \"abc-1234\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "assertion_in_step",
+            "severity": "medium",
+            "message": "Assertion should be in Expected Results"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.62,
+          "traceability": 0.5,
+          "specificity": 1.0,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.655
+        },
+        "final_score": 0.737
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 28.984895,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"1234\"",
+          "Capture the resolved ticket ID (stdout)"
+        ],
+        "expected_results": [
+          "The resolved ticket ID is \"abc-1234\"",
+          "The output should contain \"resolved_id: abc-1234\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.433,
+          "specificity": 0.8,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.458
+        },
+        "final_score": 0.611
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 23.198888,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"1234\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "The resolved ticket id should be \"abc-1234\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.725
+        },
+        "final_score": 0.735
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 23.321299,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"1234\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "The resolved ticket id should be \"abc-1234\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.725
+        },
+        "final_score": 0.735
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 22.065107,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"1234\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "The resolved ticket id should be \"abc-1234\"",
+          "Exit/status code is 0"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.725
+        },
+        "final_score": 0.738
+      }
+    }
+  ]
+}

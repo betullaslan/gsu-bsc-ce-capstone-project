@@ -1,0 +1,213 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-032",
+  "scenario_name": "Add dependency with non-existent ticket",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 36.369288,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 nonexistent\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.829
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 42.922861,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 nonexistent\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.823
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 29.005073,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 nonexistent\"",
+          "I capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "The command should exit with a non-zero status code",
+          "The output should contain \"Error: ticket 'nonexistent' not found\"",
+          "Exit/status code is non-zero"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.811
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 33.065425,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"task-0001\" exists",
+          "A ticket with ID \"task-0002\" exists",
+          "A ticket with ID \"task-0003\" exists"
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 nonexistent\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.833
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 32.092004,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 nonexistent\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ticket 'nonexistent' not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.834
+      }
+    }
+  ]
+}

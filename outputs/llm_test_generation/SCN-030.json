@@ -1,0 +1,216 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-030",
+  "scenario_name": "Remove a dependency",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 42.792353,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Ticket \"task-0001\" does not have \"task-0002\" in deps"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.55,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.8
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 52.469451,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Removed dependency: task-0001 -/-> task-0002\"",
+          "Ticket \"task-0001\" does not have \"task-0002\" in deps"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.868
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 45.227392,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Removed dependency: task-0001 -/-> task-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.828
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 35.372115,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Removed dependency: task-0001 -/-> task-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.838
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 33.019765,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket undep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Removed dependency: task-0001 -/-> task-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.842
+      }
+    }
+  ]
+}

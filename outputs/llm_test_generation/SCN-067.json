@@ -1,0 +1,187 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-067",
+  "scenario_name": "Blocked excludes closed tickets",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 36.862679,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"block-001\"",
+          "A ticket exists with ID \"block-002\"",
+          "Ticket \"block-001\" depends on \"block-002\"",
+          "Ticket \"block-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket blocked\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"id: block-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.775
+        },
+        "final_score": 0.776
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 42.819473,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"block-001\"",
+          "A ticket exists with ID \"block-002\"",
+          "Ticket \"block-001\" depends on \"block-002\"",
+          "Ticket \"block-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket blocked\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"block-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.775
+        },
+        "final_score": 0.769
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 37.667756,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"block-001\"",
+          "A ticket exists with ID \"block-002\"",
+          "Ticket \"block-001\" depends on \"block-002\"",
+          "Ticket \"block-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket blocked\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: block-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.775
+        },
+        "final_score": 0.775
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 38.61955,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"block-001\" exists",
+          "A ticket with ID \"block-002\" exists",
+          "Ticket \"block-001\" depends on \"block-002\"",
+          "Ticket \"block-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket blocked\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: block-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.775
+        },
+        "final_score": 0.774
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 35.898674,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"block-001\"",
+          "A ticket exists with ID \"block-002\"",
+          "Ticket \"block-001\" depends on \"block-002\"",
+          "Ticket \"block-001\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket blocked\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: block-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.775
+        },
+        "final_score": 0.778
+      }
+    }
+  ]
+}

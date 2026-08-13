@@ -1,0 +1,206 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-095",
+  "scenario_name": "Start command sets status to in_progress",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 38.7065,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket start test-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\"",
+          "Ticket \"test-0001\" has field \"status\" with value \"in_progress\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.824
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 25.189674,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket start test-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains \"Updated test-0001 -> in_progress\"",
+          "Ticket \"test-0001\" has field \"status\" with value \"in_progress\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 1.0,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.937
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 30.87012,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket start test-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\"",
+          "Ticket \"test-0001\" has field \"status\" with value \"in_progress\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.833
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.147765,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"test-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket start test-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\"",
+          "The command should succeed"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.867,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.837
+        },
+        "final_score": 0.783
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 31.304847,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"test-0001\""
+        ],
+        "steps": [
+          "I run \"ticket start test-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0001\"",
+          "Ticket \"test-0001\" has field \"status\" with value \"in_progress\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.832
+      }
+    }
+  ]
+}

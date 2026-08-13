@@ -1,0 +1,192 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-085",
+  "scenario_name": "Show hides blockers section when all deps closed",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 39.679833,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"show-001\"",
+          "A ticket exists with ID \"show-002\"",
+          "Ticket \"show-001\" depends on \"show-002\"",
+          "Ticket \"show-002\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: show-001\"",
+          "Output does not contain \"## Blockers\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.792
+        },
+        "final_score": 0.783
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 24.977009,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"show-001\" exists",
+          "A ticket with ID \"show-002\" exists",
+          "The ticket with ID \"show-002\" has status \"closed\"",
+          "The ticket with ID \"show-001\" depends on the ticket with ID \"show-002\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"## Blockers\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.792
+        },
+        "final_score": 0.792
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 38.246671,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"show-001\"",
+          "A ticket exists with ID \"show-002\"",
+          "Ticket \"show-001\" depends on \"show-002\"",
+          "Ticket \"show-002\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: show-001\"",
+          "Output does not contain \"## Blockers\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.792
+        },
+        "final_score": 0.784
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.965622,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"show-001\" exists",
+          "A ticket with ID \"show-002\" exists",
+          "Ticket \"show-001\" depends on \"show-002\"",
+          "Ticket \"show-002\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: show-001\"",
+          "Output does not contain \"## Blockers\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.792
+        },
+        "final_score": 0.791
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 29.493601,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"show-001\"",
+          "A ticket exists with ID \"show-002\"",
+          "Ticket \"show-001\" depends on \"show-002\"",
+          "Ticket \"show-002\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: show-001\"",
+          "Output does not contain \"## Blockers\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.792
+        },
+        "final_score": 0.794
+      }
+    }
+  ]
+}

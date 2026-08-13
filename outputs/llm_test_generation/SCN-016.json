@@ -1,0 +1,183 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-016",
+  "scenario_name": "Create a ticket with assignee",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 21.168969,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Assigned ticket' -a 'John Doe'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has field \"assignee\" with value \"John Doe\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.893
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 31.526234,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with assignee field does not exist"
+        ],
+        "steps": [
+          "I run \"ticket create 'Assigned ticket' -a 'John Doe'\"",
+          "I capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: <created_ticket_id>\"",
+          "The created ticket has field \"assignee\" with value \"John Doe\"",
+          "The created ticket does not have field \"assignee\" with value \"\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 0.833,
+          "semantic_coverage": 0.725
+        },
+        "final_score": 0.813
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 34.243745,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Assigned ticket' -a 'John Doe'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has field \"assignee\" with value \"John Doe\"",
+          "The command output (stdout) contains \"Ticket created successfully\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.717
+        },
+        "final_score": 0.793
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 33.695082,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Assigned ticket' -a 'John Doe'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has field \"assignee\" with value \"John Doe\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.874
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 22.803585,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Assigned ticket' -a 'John Doe'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has field \"assignee\" with value \"John Doe\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.889
+      }
+    }
+  ]
+}

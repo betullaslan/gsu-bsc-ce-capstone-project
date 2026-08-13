@@ -1,0 +1,202 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-029",
+  "scenario_name": "Add dependency is idempotent",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 37.959393,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Dependency already exists\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.816
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 35.532251,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.55,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.9
+        },
+        "final_score": 0.719
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 29.590808,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.55,
+          "traceability": 0.5,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.9
+        },
+        "final_score": 0.728
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.745454,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Dependency already exists\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.823
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 30.496397,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\" Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"Dependency already exists\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.567,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.825
+      }
+    }
+  ]
+}

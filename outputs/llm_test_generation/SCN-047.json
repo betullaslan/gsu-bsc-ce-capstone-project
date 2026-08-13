@@ -1,0 +1,177 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-047",
+  "scenario_name": "Edit in non-TTY mode shows file path",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 33.497568,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"edit-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket edit edit-0001\" in non-TTY mode",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Edit ticket file:\"",
+          "Output contains \".tickets/edit-0001.md\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.901
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 23.106493,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"edit-0001\""
+        ],
+        "steps": [
+          "I run \"ticket edit edit-0001\" in non-TTY mode",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Edit ticket file:\"",
+          "Output contains \".tickets/edit-0001.md\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 1.0,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.937
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 32.641279,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"edit-0001\""
+        ],
+        "steps": [
+          "I run \"ticket edit edit-0001\" in non-TTY mode",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Edit ticket file:\"",
+          "Output contains \".tickets/edit-0001.md\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.902
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 27.585407,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"edit-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket edit edit-0001\" in non-TTY mode",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Edit ticket file:\"",
+          "Output contains \".tickets/edit-0001.md\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.909
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 25.56371,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"edit-0001\""
+        ],
+        "steps": [
+          "I run \"ticket edit edit-0001\" in non-TTY mode",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Edit ticket file:\"",
+          "Output contains \".tickets/edit-0001.md\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.912
+      }
+    }
+  ]
+}

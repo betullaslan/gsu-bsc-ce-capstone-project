@@ -1,0 +1,207 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-116",
+  "scenario_name": "Resolve unknown id in isolation",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 23.910201,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\"",
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "Resolve ticket id \"nope\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"id: abc-1234\"",
+          "Output contains \"not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.417,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.712
+        },
+        "final_score": 0.686
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 27.747457,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "Resolve ticket id \"nope\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The error should contain \"not found\"",
+          "Exit/status code is non-zero"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.65,
+          "traceability": 0.0,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.332
+        },
+        "final_score": 0.52
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 25.1891,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"nope\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"id: abc-1234\"",
+          "Output contains \"not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.417,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.712
+        },
+        "final_score": 0.713
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 32.965574,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"nope\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"id: abc-1234\"",
+          "The error should contain \"not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.283,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.678
+        },
+        "final_score": 0.668
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 24.349876,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "Existing ticket IDs are \"abc-1234\", \"abc-5678\", \"xyz-9999\""
+        ],
+        "steps": [
+          "I resolve ticket id \"nope\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"id: abc-1234\"",
+          "Output contains \"not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.417,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.712
+        },
+        "final_score": 0.715
+      }
+    }
+  ]
+}

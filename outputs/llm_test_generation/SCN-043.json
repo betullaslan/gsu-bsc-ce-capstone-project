@@ -1,0 +1,199 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-043",
+  "scenario_name": "TICKETS_DIR env var takes priority over parent walking",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 31.944731,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"parent-0001\"",
+          "A separate tickets directory exists at \"other-tickets\" with ticket \"other-0001\" named \"Other ticket\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "Run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: other-0001\"",
+          "Output does not contain \"id: parent-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.855
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 27.451275,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"parent-0001\"",
+          "A separate tickets directory exists at \"other-tickets\" with ticket \"other-0001\" named \"Other ticket\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "Set TICKETS_DIR to \"other-tickets\" and run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"other-0001\"",
+          "Output does not contain \"parent-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 1.0,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.937
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 32.801344,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"parent-0001\"",
+          "A separate tickets directory exists at \"other-tickets\" with ticket \"other-0001\" named \"Other ticket\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "Run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: other-0001\"",
+          "Output does not contain \"id: parent-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.917
+        },
+        "final_score": 0.854
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 33.661155,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"parent-0001\"",
+          "A separate tickets directory exists at \"other-tickets\" with ticket \"other-0001\" named \"Other ticket\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "Set TICKETS_DIR to \"other-tickets\"",
+          "Run \"ticket ls\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: other-0001\"",
+          "Output does not contain \"id: parent-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 1.0,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.7
+        },
+        "final_score": 0.831
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 42.52013,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"parent-0001\"",
+          "A separate tickets directory exists at \"other-tickets\" with ticket \"other-0001\" named \"Other ticket\"",
+          "I am in subdirectory \"src\""
+        ],
+        "steps": [
+          "I run \"ticket ls\" with TICKETS_DIR set to \"other-tickets\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: other-0001\"",
+          "Output does not contain \"id: parent-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.899
+      }
+    }
+  ]
+}

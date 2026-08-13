@@ -1,0 +1,181 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-071",
+  "scenario_name": "Note has timestamp",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 32.592793,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'Timestamped note'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: note-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.882
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 36.193003,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'Timestamped note'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Ticket \"note-0001\" contains a timestamp in notes"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.878
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 25.857763,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'Timestamped note'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: note-0001\"",
+          "Output contains \"added note with id: note-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.717
+        },
+        "final_score": 0.812
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 28.438801,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"note-0001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'Timestamped note'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: note-0001\"",
+          "The ticket \"note-0001\" contains a timestamp in notes"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.912
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 31.449557,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"note-0001\""
+        ],
+        "steps": [
+          "I run \"ticket add-note note-0001 'Timestamped note'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: note-0001\"",
+          "Ticket \"note-0001\" contains a timestamp in notes"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.908
+      }
+    }
+  ]
+}

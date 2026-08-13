@@ -1,0 +1,199 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-120",
+  "scenario_name": "Create then close then list shows closed ticket",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 29.488584,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Close flow ticket'\"",
+          "I run \"ticket close last\"",
+          "I run \"ticket list --status closed\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output matches the pattern '^Ticket #[0-9]+$'"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.878
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 32.091406,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "No ticket exists in the tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Close flow ticket'\"",
+          "I run \"ticket close last\"",
+          "I run \"ticket list --status closed\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains a ticket ID pattern"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.92
+        },
+        "final_score": 0.875
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 37.067329,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "No open or pending tickets"
+        ],
+        "steps": [
+          "I run \"ticket create 'Close flow ticket'\"",
+          "I run \"ticket close last\"",
+          "I run \"ticket list --status closed\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output matches a pattern containing the string \"Closed\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 1.0,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.7
+        },
+        "final_score": 0.81
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 37.133279,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Close flow ticket'\"",
+          "I run \"ticket close last\"",
+          "I run \"ticket list --status closed\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a pattern of 'Closed: <ticket_id>'"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.6,
+          "specificity": 0.8,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.45
+        },
+        "final_score": 0.69
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 26.066425,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "No tickets exist in the tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Close flow ticket'\"",
+          "I run \"ticket close last\"",
+          "I run \"ticket list --status closed\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a pattern of ^Ticket #[0-9]+$"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.9
+      }
+    }
+  ]
+}

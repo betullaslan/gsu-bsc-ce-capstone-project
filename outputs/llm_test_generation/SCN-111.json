@@ -1,0 +1,222 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-111",
+  "scenario_name": "Unlinking a non-existent link leaves links empty",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 37.528908,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"cmp-0003\"",
+          "A ticket exists with ID \"cmp-0004\""
+        ],
+        "steps": [
+          "I run \"ticket unlink cmp-0003 cmp-0004\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"id: cmp-0004\"",
+          "The output should be \"Link not found\"",
+          "Ticket \"cmp-0003\" has field \"links\" with value \"[]\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.667,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.945
+        },
+        "final_score": 0.851
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 48.04367,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"cmp-0003\"",
+          "A ticket exists with ID \"cmp-0004\""
+        ],
+        "steps": [
+          "I run \"ticket unlink cmp-0003 cmp-0004\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Link not found\"",
+          "Ticket \"cmp-0003\" has field \"links\" with value \"[]\"",
+          "Ticket \"cmp-0004\" has field \"links\" with value \"[]\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.9,
+          "specificity": 0.667,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.945
+        },
+        "final_score": 0.872
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 41.287227,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"cmp-0003\"",
+          "A ticket exists with ID \"cmp-0004\""
+        ],
+        "steps": [
+          "I run \"ticket unlink cmp-0003 cmp-0004\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "The command fails",
+          "Output contains \"Link not found\"",
+          "Ticket \"cmp-0003\" has field \"links\" with value \"[]\"",
+          "Ticket \"cmp-0004\" has field \"links\" with value \"[]\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 1.0,
+          "specificity": 0.667,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.97
+        },
+        "final_score": 0.902
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.276239,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"cmp-0003\" exists",
+          "A ticket with ID \"cmp-0004\" exists"
+        ],
+        "steps": [
+          "I run \"ticket unlink cmp-0003 cmp-0004\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"id: cmp-0003\"",
+          "The output should be \"Link not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.7,
+          "traceability": 0.567,
+          "specificity": 0.6,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.737
+        },
+        "final_score": 0.713
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 41.198771,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"cmp-0003\"",
+          "A ticket exists with ID \"cmp-0004\""
+        ],
+        "steps": [
+          "I run \"ticket unlink cmp-0003 cmp-0004\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"id: cmp-0003\"",
+          "Ticket \"cmp-0003\" has field \"links\" with value \"[]\"",
+          "Ticket \"cmp-0004\" has field \"links\" with value \"[]\"",
+          "Output contains \"Link not found\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.92,
+          "specificity": 0.714,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.859
+      }
+    }
+  ]
+}

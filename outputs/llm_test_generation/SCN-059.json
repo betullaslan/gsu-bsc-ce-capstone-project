@@ -1,0 +1,187 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-059",
+  "scenario_name": "List shows dependencies",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 34.444299,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"list-0001\"",
+          "A ticket exists with ID \"list-0002\"",
+          "Ticket \"list-0001\" depends on \"list-0002\""
+        ],
+        "steps": [
+          "I run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"<- [list-0002]\"",
+          "Output contains \"list-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.88
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 31.446312,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"list-0001\"",
+          "A ticket exists with ID \"list-0002\"",
+          "Ticket \"list-0001\" depends on \"list-0002\""
+        ],
+        "steps": [
+          "I run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"<- [list-0002]\"",
+          "Output contains \"list-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.884
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 34.887249,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"list-0001\"",
+          "A ticket exists with ID \"list-0002\"",
+          "Ticket \"list-0001\" depends on \"list-0002\""
+        ],
+        "steps": [
+          "I run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"<- [list-0002]\"",
+          "Output contains \"list-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.88
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 29.808446,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"list-0001\" exists",
+          "A ticket with ID \"list-0002\" exists",
+          "Ticket \"list-0001\" depends on ticket \"list-0002\""
+        ],
+        "steps": [
+          "I run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"<- [list-0002]\"",
+          "Output contains \"list-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.887
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 35.779831,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"list-0001\"",
+          "A ticket exists with ID \"list-0002\"",
+          "Ticket \"list-0001\" depends on \"list-0002\""
+        ],
+        "steps": [
+          "I run \"ticket ls\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"<- [list-0002]\"",
+          "Output contains \"list-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.878
+      }
+    }
+  ]
+}

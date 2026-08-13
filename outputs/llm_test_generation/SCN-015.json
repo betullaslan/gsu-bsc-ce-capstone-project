@@ -1,0 +1,184 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-015",
+  "scenario_name": "Create a ticket with priority",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 23.006875,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'High priority' -p 0\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has field \"priority\" with value \"0\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 1.0,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 1.0
+        },
+        "final_score": 0.94
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 39.744893,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket does not exist with ID \"test-0002\""
+        ],
+        "steps": [
+          "Run \"ticket show test-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: test-0002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 3,
+        "warnings": [
+          {
+            "type": "missing_literal_value",
+            "severity": "high",
+            "message": "Important literal value is missing"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          },
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.6,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 0.5,
+          "semantic_coverage": 0.35
+        },
+        "final_score": 0.578
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 24.056229,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'High priority' -p 0\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has field \"priority\" with value \"0\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 1.0,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 1.0
+        },
+        "final_score": 0.938
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 36.383909,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'High priority' -p 0\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket has field \"priority\" with value \"0\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 1.0,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 1.0
+        },
+        "final_score": 0.923
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 21.96848,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'High priority' -p 0\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The created ticket should have field \"priority\" with value \"0\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 1.0,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 1.0
+        },
+        "final_score": 0.943
+      }
+    }
+  ]
+}

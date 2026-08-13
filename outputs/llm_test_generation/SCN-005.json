@@ -1,0 +1,205 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-005",
+  "scenario_name": "Ambiguous ID error",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 36.221993,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "Two ticket IDs exist: \"abc-1234\" and \"abc-5678\""
+        ],
+        "steps": [
+          "Run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ambiguous ID 'abc' matches multiple tickets\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.4,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.653
+        },
+        "final_score": 0.681
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 45.445438,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"abc-1234\"",
+          "A ticket exists with ID \"abc-5678\""
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ambiguous ID 'abc' matches multiple tickets\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.4,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.653
+        },
+        "final_score": 0.672
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 35.159792,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "Two ticket IDs exist: \"abc-1234\" and \"abc-5678\""
+        ],
+        "steps": [
+          "Run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ambiguous ID 'abc' matches multiple tickets\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.4,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.653
+        },
+        "final_score": 0.683
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 33.566594,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"abc-1234\"",
+          "A ticket exists with ID \"abc-5678\""
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ambiguous ID 'abc' matches multiple tickets\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.4,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.653
+        },
+        "final_score": 0.685
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 33.138314,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"abc-1234\"",
+          "A ticket exists with ID \"abc-5678\""
+        ],
+        "steps": [
+          "I run \"ticket show abc\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is non-zero",
+          "Output contains \"Error: ambiguous ID 'abc' matches multiple tickets\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.4,
+          "specificity": 0.5,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.653
+        },
+        "final_score": 0.686
+      }
+    }
+  ]
+}

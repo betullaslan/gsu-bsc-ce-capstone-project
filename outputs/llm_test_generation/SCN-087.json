@@ -1,0 +1,186 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-087",
+  "scenario_name": "Show displays children section",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 34.92906,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"show-001\"",
+          "A ticket exists with ID \"show-002\" with parent \"show-001\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"## Children\"",
+          "Output contains \"show-002 [open] Child\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.884
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 23.567889,
+      "generation_attempts": 1,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"show-001\"",
+          "A ticket exists with ID \"show-002\" and parent \"show-001\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit status code is 0",
+          "Output contains \"## Children\"",
+          "Output contains \"show-002 [open] Child\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.85,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.92
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 26.494041,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"show-001\"",
+          "A ticket exists with ID \"show-002\" with parent \"show-001\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"## Children\"",
+          "Output contains \"show-002 [open] Child\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.894
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 29.36044,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"show-001\" exists",
+          "A ticket with ID \"show-002\" and parent \"show-001\" exists"
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0 and output contains \"show-001\"",
+          "Output contains \"## Children\"",
+          "Output contains \"show-002 [open] Child\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 1.0,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 1.0
+        },
+        "final_score": 0.91
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 27.688122,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"show-001\"",
+          "A ticket exists with ID \"show-002\" with parent \"show-001\""
+        ],
+        "steps": [
+          "I run \"ticket show show-001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"## Children\"",
+          "Output contains \"show-002 [open] Child\"",
+          "Output contains \"show-001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.893
+      }
+    }
+  ]
+}

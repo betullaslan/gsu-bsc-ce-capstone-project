@@ -1,0 +1,204 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-012",
+  "scenario_name": "Create a ticket with default name",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 34.351495,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a ticket ID pattern",
+          "A ticket file exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.907
+        },
+        "final_score": 0.821
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 33.035967,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket file does not exist"
+        ],
+        "steps": [
+          "I run \"ticket create\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output matches a ticket ID pattern",
+          "A ticket file exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.907
+        },
+        "final_score": 0.823
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 37.061762,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "No existing ticket files or directories"
+        ],
+        "steps": [
+          "I run \"ticket create\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output should match a pattern like \"Ticket created with ID [0-9]+\"",
+          "A ticket file named \"ticket-[0-9]+.txt\" exists in the tickets directory"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 0.6,
+          "semantic_coverage": 0.467
+        },
+        "final_score": 0.716
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 31.233197,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a ticket ID pattern",
+          "A ticket file exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.907
+        },
+        "final_score": 0.825
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 25.001001,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a ticket ID pattern",
+          "A ticket file exists"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.907
+        },
+        "final_score": 0.835
+      }
+    }
+  ]
+}

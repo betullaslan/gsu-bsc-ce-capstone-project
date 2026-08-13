@@ -1,0 +1,202 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-104",
+  "scenario_name": "Help output must not leak environment values",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 30.118505,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "The environment variable \"API_KEY\" is set to \"super-secret\"",
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket help\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"super-secret\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.868
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 38.020393,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The environment variable \"API_KEY\" is set to \"super-secret\""
+        ],
+        "steps": [
+          "I run \"ticket help\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"super-secret\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.857
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 31.035461,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The environment variable \"API_KEY\" is set to \"super-secret\""
+        ],
+        "steps": [
+          "Run \"ticket help\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output does not contain \"super-secret\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.866
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 33.36521,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The environment variable \"API_KEY\" is set to \"super-secret\""
+        ],
+        "steps": [
+          "I run \"ticket help\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output does not contain \"super-secret\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.863
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 31.004303,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "The environment variable \"API_KEY\" is set to \"super-secret\""
+        ],
+        "steps": [
+          "I run \"ticket help\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output does not contain \"super-secret\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "unsupported_precondition",
+            "severity": "high",
+            "message": "Precondition includes an unsupported invented context (e.g., directory/location)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.75,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.866
+      }
+    }
+  ]
+}

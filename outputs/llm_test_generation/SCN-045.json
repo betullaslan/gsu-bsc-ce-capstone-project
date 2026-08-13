@@ -1,0 +1,187 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-045",
+  "scenario_name": "Dep command works from subdirectory",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 34.90876,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"task-0001\" exists",
+          "A ticket with ID \"task-0002\" exists",
+          "I am in subdirectory \"lib\""
+        ],
+        "steps": [
+          "Run command: \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added dependency\"",
+          "Output contains \"task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.838
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 31.308791,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "I am in subdirectory \"lib\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added dependency\"",
+          "Output contains \"task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.843
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 52.524079,
+      "generation_attempts": 5,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "I am in subdirectory \"lib\""
+        ],
+        "steps": [
+          "Run command: \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added dependency\"",
+          "Output contains \"task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.825
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 29.075196,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"task-0001\" exists",
+          "A ticket with ID \"task-0002\" exists",
+          "I am in subdirectory \"lib\""
+        ],
+        "steps": [
+          "Run command: \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added dependency\"",
+          "Output contains \"task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.847
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 33.692229,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "I am in subdirectory \"lib\""
+        ],
+        "steps": [
+          "I run \"ticket dep task-0001 task-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added dependency\"",
+          "Output contains \"task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.84
+      }
+    }
+  ]
+}

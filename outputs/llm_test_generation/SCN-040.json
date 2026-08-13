@@ -1,0 +1,222 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-040",
+  "scenario_name": "Create ticket initializes in current directory when no parent has tickets",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 47.051006,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "I am in subdirectory \"new-project\"",
+          "The tickets directory does not exist"
+        ],
+        "steps": [
+          "Navigate to the current working directory and enter the \"new-project\" subdirectory",
+          "Run \"ticket create 'First ticket'\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a ticket ID pattern",
+          "The tickets directory exists in the current subdirectory"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.6,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.687
+        },
+        "final_score": 0.759
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 41.230267,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "The tickets directory does not exist",
+          "I am in subdirectory \"new-project\""
+        ],
+        "steps": [
+          "Run \"ticket create 'First ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains a ticket ID pattern",
+          "Tickets directory should exist in current subdirectory"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.733,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.903
+        },
+        "final_score": 0.799
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 42.8683,
+      "generation_attempts": 4,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "I am in subdirectory \"new-project\"",
+          "The tickets directory does not exist"
+        ],
+        "steps": [
+          "Run command: ticket create 'First ticket'",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains a ticket ID pattern",
+          "Tickets directory exists in current subdirectory"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          },
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.733,
+          "specificity": 0.2,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.653
+        },
+        "final_score": 0.669
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 34.51969,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "I am in subdirectory \"new-project\"",
+          "The tickets directory does not exist"
+        ],
+        "steps": [
+          "I run \"ticket create 'First ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a ticket ID pattern",
+          "Tickets directory exists in current subdirectory"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.733,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.903
+        },
+        "final_score": 0.807
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 34.323649,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "The tickets directory does not exist",
+          "I am in subdirectory \"new-project\""
+        ],
+        "steps": [
+          "I run \"ticket create 'First ticket'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "The output matches a ticket ID pattern",
+          "Tickets directory exists in current subdirectory"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.733,
+          "specificity": 0.4,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.903
+        },
+        "final_score": 0.807
+      }
+    }
+  ]
+}

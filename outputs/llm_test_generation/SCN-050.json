@@ -1,0 +1,215 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-050",
+  "scenario_name": "Link two tickets",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 43.74681,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 2 link(s) between 2 tickets\"",
+          "Ticket \"link-0001\" has \"link-0002\" in links",
+          "Ticket \"link-0002\" has \"link-0001\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "redundant_expected_result",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate expected result"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.913
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 51.800858,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 2 link(s) between 2 tickets\"",
+          "Ticket \"link-0001\" has \"link-0002\" in links",
+          "Ticket \"link-0002\" has \"link-0001\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "redundant_expected_result",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate expected result"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.906
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 44.035623,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 2 link(s) between 2 tickets\"",
+          "Ticket \"link-0001\" has \"link-0002\" in links",
+          "Ticket \"link-0002\" has \"link-0001\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "redundant_expected_result",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate expected result"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.913
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 37.541991,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"link-0001\" exists",
+          "A ticket with ID \"link-0002\" exists",
+          "A ticket with ID \"link-0003\" exists"
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 2 link(s) between 2 tickets\"",
+          "Ticket \"link-0001\" has \"link-0002\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.917
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 44.056732,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"link-0001\"",
+          "A ticket exists with ID \"link-0002\"",
+          "A ticket exists with ID \"link-0003\""
+        ],
+        "steps": [
+          "I run \"ticket link link-0001 link-0002\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Added 2 link(s) between 2 tickets\"",
+          "Ticket \"link-0001\" has \"link-0002\" in links",
+          "Ticket \"link-0002\" has \"link-0001\" in links"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "redundant_expected_result",
+            "severity": "low",
+            "message": "Duplicate or near-duplicate expected result"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.913
+      }
+    }
+  ]
+}

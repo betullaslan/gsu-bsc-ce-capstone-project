@@ -1,0 +1,197 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-061",
+  "scenario_name": "Ready shows tickets with no deps and with closed deps",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 43.163059,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"ready-001\" exists",
+          "A ticket with ID \"ready-002\" exists",
+          "A ticket with ID \"ready-003\" exists",
+          "Ticket \"ready-002\" depends on \"ready-003\"",
+          "Ticket \"ready-003\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\"",
+          "Output contains \"id: ready-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.833
+        },
+        "final_score": 0.818
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 37.293899,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"ready-001\"",
+          "A ticket exists with ID \"ready-002\"",
+          "A ticket exists with ID \"ready-003\"",
+          "Ticket \"ready-002\" depends on \"ready-003\"",
+          "Ticket \"ready-003\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"ready-001\"",
+          "Output contains \"ready-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.833
+        },
+        "final_score": 0.824
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 42.241363,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "A ticket exists with ID \"ready-002\"",
+          "A ticket exists with ID \"ready-003\"",
+          "Ticket \"ready-002\" depends on \"ready-003\"",
+          "Ticket \"ready-003\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\"",
+          "Output contains \"id: ready-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.833
+        },
+        "final_score": 0.819
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 34.970927,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"ready-001\" exists",
+          "A ticket with ID \"ready-002\" exists",
+          "A ticket with ID \"ready-003\" exists",
+          "Ticket \"ready-002\" depends on \"ready-003\"",
+          "Ticket \"ready-003\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\"",
+          "Output contains \"id: ready-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.833
+        },
+        "final_score": 0.827
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 32.740528,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"ready-001\"",
+          "A ticket exists with ID \"ready-002\"",
+          "A ticket exists with ID \"ready-003\"",
+          "Ticket \"ready-002\" depends on \"ready-003\"",
+          "Ticket \"ready-003\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket ready\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: ready-001\"",
+          "Output contains \"id: ready-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.667,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.833
+        },
+        "final_score": 0.83
+      }
+    }
+  ]
+}

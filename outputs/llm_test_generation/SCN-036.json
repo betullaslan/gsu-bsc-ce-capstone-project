@@ -1,0 +1,202 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-036",
+  "scenario_name": "Dependency tree with multiple children",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 49.120394,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\"",
+          "ticket \"task-0001\" depends on \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep tree task-0001\" Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"task-0002\"",
+          "Output contains \"task-0003\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.885
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 44.541257,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\"",
+          "ticket \"task-0001\" depends on \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep tree task-0001\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"task-0002\"",
+          "Output contains \"task-0003\"",
+          "Output contains \"task-0001\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.6,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.858
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 37.013503,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\"",
+          "ticket \"task-0001\" depends on \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep tree task-0001\" Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"task-0002\"",
+          "Output contains \"task-0003\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.896
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 38.432875,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\"",
+          "ticket \"task-0001\" depends on \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep tree task-0001\" Capture the command output (stdout)",
+          "I capture the command output"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"task-0002\"",
+          "Output contains \"task-0003\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.895
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 34.253774,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"task-0001\"",
+          "A ticket exists with ID \"task-0002\"",
+          "A ticket exists with ID \"task-0003\"",
+          "ticket \"task-0001\" depends on \"task-0002\"",
+          "ticket \"task-0001\" depends on \"task-0003\""
+        ],
+        "steps": [
+          "I run \"ticket dep tree task-0001\" Capture the command output (stdout)",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: task-0001\"",
+          "Output contains \"task-0002\"",
+          "Output contains \"task-0003\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.75,
+          "traceability": 0.9,
+          "specificity": 0.833,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.975
+        },
+        "final_score": 0.9
+      }
+    }
+  ]
+}

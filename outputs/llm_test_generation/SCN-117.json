@@ -1,0 +1,190 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-117",
+  "scenario_name": "Create then show works in a normal flow",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 23.081136,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Flow ticket'\"",
+          "I run \"ticket show last\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Flow ticket\"",
+          "The command should succeed"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.733,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.903
+        },
+        "final_score": 0.865
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 30.535791,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Flow ticket'\"",
+          "I run \"ticket show last\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"last\"",
+          "Output contains \"Flow ticket\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.833,
+          "hallucination": 0.833,
+          "semantic_coverage": 0.717
+        },
+        "final_score": 0.808
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 33.396472,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Flow ticket'\"",
+          "I run \"ticket show last\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Flow ticket\"",
+          "Output matches a ticket ID pattern"
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean_with_warnings",
+        "warning_count": 1,
+        "warnings": [
+          {
+            "type": "generic_expected_result",
+            "severity": "low",
+            "message": "Expected result is too generic (without errors/success)"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.937
+        },
+        "final_score": 0.884
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 24.373887,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists"
+        ],
+        "steps": [
+          "I run \"ticket create 'Flow ticket'\"",
+          "I run \"ticket show last\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Flow ticket\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.895
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 22.045038,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory"
+        ],
+        "steps": [
+          "I run \"ticket create 'Flow ticket'\"",
+          "I run \"ticket show last\""
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"Flow ticket\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.8,
+          "specificity": 1.0,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.95
+        },
+        "final_score": 0.93
+      }
+    }
+  ]
+}

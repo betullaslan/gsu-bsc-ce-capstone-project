@@ -1,0 +1,197 @@
+{
+  "model": "llama3.2:3b",
+  "scenario_id": "SCN-078",
+  "scenario_name": "Query with jq filter",
+  "results": [
+    {
+      "strategy": "zero_shot_prompting",
+      "response_time_seconds": 38.647149,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"query-001\" exists",
+          "A ticket with ID \"query-002\" exists",
+          "The ticket with ID \"query-002\" has a status of \"closed\""
+        ],
+        "steps": [
+          "Run \"ticket query '.status == \\\"open\\\"'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "Output does not contain \"id: query-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.903
+      }
+    },
+    {
+      "strategy": "few_shot_prompting",
+      "response_time_seconds": 42.469665,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket exists with ID \"query-001\"",
+          "A ticket exists with ID \"query-002\" and status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket query '.status == \\\"open\\\"'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "Output does not contain \"query-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.9
+      }
+    },
+    {
+      "strategy": "instruction_based_prompting",
+      "response_time_seconds": 38.640232,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"query-001\" exists",
+          "A ticket with ID \"query-002\" exists",
+          "A ticket with ID \"query-002\" has status \"closed\""
+        ],
+        "steps": [
+          "Run command: `ticket query '.status == \"open\"'`",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "Output does not contain \"id: query-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "needs_review",
+        "warning_count": 2,
+        "warnings": [
+          {
+            "type": "irrelevant_or_invented_step",
+            "severity": "high",
+            "message": "Step is not supported by the source scenario"
+          },
+          {
+            "type": "missing_when_action_literal",
+            "severity": "high",
+            "message": "When-step literal action from the scenario is missing or changed"
+          }
+        ],
+        "quality_metrics": {
+          "completeness": 0.8,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 0.8,
+          "semantic_coverage": 0.667
+        },
+        "final_score": 0.76
+      }
+    },
+    {
+      "strategy": "constraint_prompting",
+      "response_time_seconds": 40.533036,
+      "generation_attempts": 3,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory exists",
+          "A ticket with ID \"query-001\" exists",
+          "A ticket with ID \"query-002\" exists",
+          "The ticket with ID \"query-002\" has a status of \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket query '.status == \\\"open\\\"'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "Output does not contain \"id: query-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.901
+      }
+    },
+    {
+      "strategy": "step_by_step_prompting",
+      "response_time_seconds": 28.08251,
+      "generation_attempts": 2,
+      "test_case": {
+        "preconditions": [
+          "A clean tickets directory",
+          "A ticket exists with ID \"query-001\"",
+          "A ticket exists with ID \"query-002\"",
+          "Ticket \"query-002\" has status \"closed\""
+        ],
+        "steps": [
+          "I run \"ticket query '.status == \\\"open\\\"'\"",
+          "Capture the command output (stdout)"
+        ],
+        "expected_results": [
+          "Exit/status code is 0",
+          "Output contains \"id: query-001\"",
+          "Output does not contain \"id: query-002\""
+        ]
+      },
+      "validation": {
+        "is_valid": true,
+        "quality_status": "clean",
+        "warning_count": 0,
+        "warnings": [],
+        "quality_metrics": {
+          "completeness": 0.9,
+          "traceability": 0.867,
+          "specificity": 0.8,
+          "hallucination": 1.0,
+          "semantic_coverage": 0.967
+        },
+        "final_score": 0.917
+      }
+    }
+  ]
+}
