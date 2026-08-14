@@ -1,0 +1,31 @@
+﻿test_type,strategy,n,avg_final_score,valid_rate,avg_warning_count
+End-to-End,step_by_step_prompting,3,0.849,1.0,1.0
+End-to-End,zero_shot_prompting,3,0.821,1.0,1.667
+End-to-End,few_shot_prompting,3,0.815,1.0,1.333
+End-to-End,instruction_based_prompting,3,0.806,1.0,1.667
+End-to-End,constraint_prompting,3,0.769,1.0,1.333
+Error Handling,step_by_step_prompting,17,0.819,1.0,1.0
+Error Handling,instruction_based_prompting,17,0.813,1.0,1.0
+Error Handling,zero_shot_prompting,17,0.806,1.0,1.0
+Error Handling,constraint_prompting,17,0.803,1.0,1.059
+Error Handling,few_shot_prompting,17,0.781,1.0,1.059
+Functional,step_by_step_prompting,89,0.865,1.0,0.303
+Functional,few_shot_prompting,89,0.856,0.989,0.348
+Functional,constraint_prompting,89,0.855,1.0,0.337
+Functional,zero_shot_prompting,89,0.848,1.0,0.393
+Functional,instruction_based_prompting,89,0.847,1.0,0.438
+Performance,constraint_prompting,4,0.879,1.0,0.25
+Performance,zero_shot_prompting,4,0.853,1.0,0.75
+Performance,step_by_step_prompting,4,0.847,1.0,0.75
+Performance,instruction_based_prompting,4,0.84,1.0,1.0
+Performance,few_shot_prompting,4,0.818,1.0,1.0
+Regression,step_by_step_prompting,3,0.863,1.0,0.333
+Regression,constraint_prompting,3,0.857,1.0,0.333
+Regression,instruction_based_prompting,3,0.855,1.0,0.333
+Regression,zero_shot_prompting,3,0.855,1.0,0.333
+Regression,few_shot_prompting,3,0.841,1.0,0.333
+Security,step_by_step_prompting,4,0.765,1.0,1.5
+Security,zero_shot_prompting,4,0.764,1.0,1.5
+Security,constraint_prompting,4,0.762,1.0,1.5
+Security,instruction_based_prompting,4,0.761,1.0,1.5
+Security,few_shot_prompting,4,0.752,1.0,1.5

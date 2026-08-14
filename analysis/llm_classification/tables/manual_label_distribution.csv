@@ -1,0 +1,11 @@
+﻿dimension,label,count,rate
+test_level,System,100,0.833333
+test_level,Integration,9,0.075
+test_level,Acceptance,7,0.058333
+test_level,Unit,4,0.033333
+test_type,Functional,89,0.741667
+test_type,Error Handling,17,0.141667
+test_type,Performance,4,0.033333
+test_type,Security,4,0.033333
+test_type,End-to-End,3,0.025
+test_type,Regression,3,0.025

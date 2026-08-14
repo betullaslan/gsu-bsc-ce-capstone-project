@@ -1,0 +1,7 @@
+﻿test_type,n,avg_final_score,valid_rate,avg_warning_count
+End-to-End,15,0.812,1.0,1.4
+Error Handling,85,0.804,1.0,1.024
+Functional,445,0.854,0.998,0.364
+Performance,20,0.847,1.0,0.75
+Regression,15,0.854,1.0,0.333
+Security,20,0.761,1.0,1.5

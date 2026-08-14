@@ -1,0 +1,11 @@
+warning_type,severity,count,percentage_of_test_cases,percentage_of_all_warnings,most_common_strategy
+generic_expected_result,low,157,26.17,49.06,zero_shot_prompting
+missing_literal_value,high,86,14.33,26.88,instruction_based_prompting
+irrelevant_or_invented_step,high,40,6.67,12.5,few_shot_prompting
+redundant_expected_result,low,10,1.67,3.12,instruction_based_prompting
+unsupported_precondition,high,10,1.67,3.12,zero_shot_prompting
+missing_when_action_literal,high,9,1.5,2.81,instruction_based_prompting
+redundant_step,low,3,0.5,0.94,few_shot_prompting
+unsupported_action_step,high,2,0.33,0.62,few_shot_prompting
+min_test_steps_not_met,low,2,0.33,0.62,zero_shot_prompting
+assertion_in_step,medium,1,0.17,0.31,zero_shot_prompting

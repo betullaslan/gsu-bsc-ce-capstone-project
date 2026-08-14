@@ -1,0 +1,5 @@
+﻿test_level,n,avg_final_score,valid_rate,avg_warning_count
+Acceptance,35,0.829,0.971,0.743
+Integration,45,0.834,1.0,0.467
+System,500,0.85,1.0,0.52
+Unit,20,0.701,1.0,0.65

@@ -1,0 +1,121 @@
+﻿scenario_id,feature,scenario,manual_test_level,llm_test_level,level_match,manual_test_type,llm_test_type,type_match,both_match
+SCN-001,Ticket ID Resolution,Exact ID match,Integration,Integration,True,Functional,Functional,True,True
+SCN-002,Ticket ID Resolution,Partial ID match by suffix,Integration,Integration,True,Functional,Functional,True,True
+SCN-003,Ticket ID Resolution,Partial ID match by prefix,Integration,Integration,True,Functional,Functional,True,True
+SCN-004,Ticket ID Resolution,Partial ID match by substring,Integration,Integration,True,Functional,Functional,True,True
+SCN-005,Ticket ID Resolution,Ambiguous ID error,Integration,Integration,True,Error Handling,Error Handling,True,True
+SCN-006,Ticket ID Resolution,Non-existent ID error,System,System,True,Error Handling,Error Handling,True,True
+SCN-007,Ticket ID Resolution,Exact match takes precedence,Integration,Integration,True,Functional,Functional,True,True
+SCN-008,Ticket ID Resolution,ID resolution works with status command,Integration,Integration,True,Functional,Functional,True,True
+SCN-009,Ticket ID Resolution,ID resolution works with dep command,Integration,Integration,True,Functional,Functional,True,True
+SCN-010,Ticket ID Resolution,ID resolution works with link command,Integration,Integration,True,Functional,Functional,True,True
+SCN-011,Ticket Creation,Create a basic ticket with name,System,System,True,Functional,Functional,True,True
+SCN-012,Ticket Creation,Create a ticket with default name,System,System,True,Functional,Functional,True,True
+SCN-013,Ticket Creation,Create a ticket with description,System,System,True,Functional,Functional,True,True
+SCN-014,Ticket Creation,Create a ticket with type,System,System,True,Functional,Functional,True,True
+SCN-015,Ticket Creation,Create a ticket with priority,System,System,True,Functional,Functional,True,True
+SCN-016,Ticket Creation,Create a ticket with assignee,System,System,True,Functional,Functional,True,True
+SCN-017,Ticket Creation,Create a ticket with external reference,System,System,True,Functional,Functional,True,True
+SCN-018,Ticket Creation,Create a ticket with parent,System,System,True,Functional,Functional,True,True
+SCN-019,Ticket Creation,Create a ticket with design notes,System,System,True,Functional,Functional,True,True
+SCN-020,Ticket Creation,Create a ticket with acceptance criteria,System,Acceptance,False,Functional,Functional,True,False
+SCN-021,Ticket Creation,Ticket has default status open,System,System,True,Functional,Functional,True,True
+SCN-022,Ticket Creation,Ticket has default priority 2,System,System,True,Functional,Functional,True,True
+SCN-023,Ticket Creation,Ticket has default type task,System,System,True,Functional,Functional,True,True
+SCN-024,Ticket Creation,Ticket has empty deps by default,System,System,True,Functional,Functional,True,True
+SCN-025,Ticket Creation,Ticket has empty links by default,System,System,True,Functional,Functional,True,True
+SCN-026,Ticket Creation,Ticket has created timestamp,System,System,True,Functional,Functional,True,True
+SCN-027,Ticket Creation,Tickets directory created on demand,System,System,True,Functional,Functional,True,True
+SCN-028,Ticket Dependencies,Add a dependency,System,Integration,False,Functional,Functional,True,False
+SCN-029,Ticket Dependencies,Add dependency is idempotent,System,Integration,False,Functional,Functional,True,False
+SCN-030,Ticket Dependencies,Remove a dependency,System,System,True,Functional,Functional,True,True
+SCN-031,Ticket Dependencies,Remove non-existent dependency,System,System,True,Error Handling,Error Handling,True,True
+SCN-032,Ticket Dependencies,Add dependency with non-existent ticket,System,Integration,False,Error Handling,Error Handling,True,False
+SCN-033,Ticket Dependencies,Add dependency to non-existent ticket,System,System,True,Error Handling,Error Handling,True,True
+SCN-034,Ticket Dependencies,View dependency tree,System,System,True,Functional,Functional,True,True
+SCN-035,Ticket Dependencies,Dependency tree shows status and name,System,System,True,Functional,Functional,True,True
+SCN-036,Ticket Dependencies,Dependency tree with multiple children,System,System,True,Functional,Functional,True,True
+SCN-037,Ticket Directory Resolution,Find tickets in current directory,System,System,True,Functional,Functional,True,True
+SCN-038,Ticket Directory Resolution,Find tickets in parent directory,Acceptance,System,False,Functional,Functional,True,False
+SCN-039,Ticket Directory Resolution,Find tickets in grandparent directory,Acceptance,System,False,Functional,Functional,True,False
+SCN-040,Ticket Directory Resolution,Create ticket initializes in current directory when no parent has tickets,System,System,True,Functional,Functional,True,True
+SCN-041,Ticket Directory Resolution,Error when no tickets directory for read command,System,System,True,Error Handling,Error Handling,True,True
+SCN-042,Ticket Directory Resolution,Error when no tickets directory in any parent,System,System,True,Error Handling,Error Handling,True,True
+SCN-043,Ticket Directory Resolution,TICKETS_DIR env var takes priority over parent walking,Acceptance,System,False,Functional,Functional,True,False
+SCN-044,Ticket Directory Resolution,Show command works from subdirectory,System,System,True,Functional,Functional,True,True
+SCN-045,Ticket Directory Resolution,Dep command works from subdirectory,Acceptance,System,False,Functional,Functional,True,False
+SCN-046,Ticket Directory Resolution,Help command works without tickets directory,System,System,True,Functional,Functional,True,True
+SCN-047,Ticket Edit,Edit in non-TTY mode shows file path,System,System,True,Functional,Functional,True,True
+SCN-048,Ticket Edit,Edit non-existent ticket,System,System,True,Error Handling,Error Handling,True,True
+SCN-049,Ticket Edit,Edit with partial ID,System,System,True,Functional,Functional,True,True
+SCN-050,Ticket Links,Link two tickets,System,System,True,Functional,Functional,True,True
+SCN-051,Ticket Links,Link three tickets,System,System,True,Functional,Functional,True,True
+SCN-052,Ticket Links,Link is idempotent,System,System,True,Functional,Functional,True,True
+SCN-053,Ticket Links,Unlink two tickets,System,System,True,Functional,Functional,True,True
+SCN-054,Ticket Links,Unlink non-existent link,System,System,True,Error Handling,Error Handling,True,True
+SCN-055,Ticket Links,Link with non-existent ticket,System,System,True,Error Handling,Error Handling,True,True
+SCN-056,Ticket Links,Partial linking adds only new links,System,Integration,False,Functional,Functional,True,False
+SCN-057,Ticket Listing,List all tickets,System,System,True,Functional,Functional,True,True
+SCN-058,Ticket Listing,List with status filter,System,System,True,Functional,Functional,True,True
+SCN-059,Ticket Listing,List shows dependencies,System,System,True,Functional,Functional,True,True
+SCN-060,Ticket Listing,List with no tickets returns nothing,System,System,True,Functional,Functional,True,True
+SCN-061,Ticket Listing,Ready shows tickets with no deps and with closed deps,System,System,True,Functional,Functional,True,True
+SCN-062,Ticket Listing,Ready excludes tickets with unclosed deps,System,System,True,Functional,Functional,True,True
+SCN-063,Ticket Listing,Ready shows tickets when deps are closed,System,System,True,Functional,Functional,True,True
+SCN-064,Ticket Listing,Ready excludes closed tickets,System,System,True,Functional,Error Handling,False,False
+SCN-065,Ticket Listing,Blocked shows tickets with unclosed deps,System,System,True,Functional,Functional,True,True
+SCN-066,Ticket Listing,Blocked excludes tickets with all deps closed,System,System,True,Functional,Functional,True,True
+SCN-067,Ticket Listing,Blocked excludes closed tickets,System,System,True,Functional,Functional,True,True
+SCN-068,Ticket Listing,Blocked shows only unclosed blockers,System,System,True,Functional,Functional,True,True
+SCN-069,Ticket Listing,Closed excludes open tickets,System,System,True,Functional,Functional,True,True
+SCN-070,Ticket Notes,Add a note to ticket,System,Integration,False,Functional,Functional,True,False
+SCN-071,Ticket Notes,Note has timestamp,System,System,True,Functional,Functional,True,True
+SCN-072,Ticket Notes,Add multiple notes,System,Integration,False,Functional,Functional,True,False
+SCN-073,Ticket Notes,Add note to ticket that already has notes section,System,Integration,False,Functional,Functional,True,False
+SCN-074,Ticket Notes,Add note with empty string adds timestamp-only note,System,Integration,False,Functional,Functional,True,False
+SCN-075,Ticket Notes,Add note to non-existent ticket,System,System,True,Error Handling,Error Handling,True,True
+SCN-076,Ticket Notes,Add note with partial ID,System,Integration,False,Functional,Functional,True,False
+SCN-077,Ticket Query,Query all tickets as JSONL,System,System,True,Functional,Functional,True,True
+SCN-078,Ticket Query,Query with jq filter,System,System,True,Functional,Functional,True,True
+SCN-079,Ticket Query,Query includes all fields,System,System,True,Functional,Functional,True,True
+SCN-080,Ticket Query,Query with no tickets,System,System,True,Functional,Functional,True,True
+SCN-081,Ticket Query,Query arrays are JSON arrays,System,System,True,Functional,Functional,True,True
+SCN-082,Ticket Show,Show displays ticket content,System,System,True,Functional,Functional,True,True
+SCN-083,Ticket Show,Show displays all frontmatter fields,System,System,True,Functional,Functional,True,True
+SCN-084,Ticket Show,Show displays blockers section,System,System,True,Functional,Functional,True,True
+SCN-085,Ticket Show,Show hides blockers section when all deps closed,System,System,True,Functional,Functional,True,True
+SCN-086,Ticket Show,Show displays blocking section,System,System,True,Functional,Functional,True,True
+SCN-087,Ticket Show,Show displays children section,System,System,True,Functional,Functional,True,True
+SCN-088,Ticket Show,Show displays linked section,System,System,True,Functional,Functional,True,True
+SCN-089,Ticket Show,Show enhances parent field with name,System,System,True,Functional,Functional,True,True
+SCN-090,Ticket Show,Show non-existent ticket,System,System,True,Error Handling,Error Handling,True,True
+SCN-091,Ticket Show,Show with partial ID,System,System,True,Functional,Functional,True,True
+SCN-092,Ticket Status Management,Set status to in_progress,System,System,True,Functional,Functional,True,True
+SCN-093,Ticket Status Management,Set status to closed,System,System,True,Functional,Functional,True,True
+SCN-094,Ticket Status Management,Set status to open,System,System,True,Functional,Functional,True,True
+SCN-095,Ticket Status Management,Start command sets status to in_progress,System,System,True,Functional,Functional,True,True
+SCN-096,Ticket Status Management,Close command sets status to closed,System,System,True,Functional,Functional,True,True
+SCN-097,Ticket Status Management,Reopen command sets status to open,System,System,True,Functional,Functional,True,True
+SCN-098,Ticket Status Management,Invalid status value,System,System,True,Error Handling,Error Handling,True,True
+SCN-099,Ticket Status Management,Status of non-existent ticket,System,System,True,Error Handling,Error Handling,True,True
+SCN-100,Ticket Status Management,Status command with partial ID,System,System,True,Functional,Functional,True,True
+SCN-101,Ticket Safety,Reject path traversal patterns in ticket id,System,System,True,Security,Error Handling,False,False
+SCN-102,Ticket Safety,Reject absolute paths in ticket id,System,Integration,False,Security,Error Handling,False,False
+SCN-103,Ticket Safety,Reject suspicious ids in link command,System,System,True,Security,Error Handling,False,False
+SCN-104,Ticket Safety,Help output must not leak environment values,System,System,True,Security,Error Handling,False,False
+SCN-105,Ticket Safety,List completes quickly with many tickets,System,System,True,Performance,Performance,True,True
+SCN-106,Ticket Safety,Query completes quickly for JSON output,System,System,True,Performance,Performance,True,True
+SCN-107,Ticket Safety,Dependency tree completes quickly for deep chains,System,System,True,Performance,Performance,True,True
+SCN-108,Ticket Safety,Show completes quickly for a single ticket,System,System,True,Performance,Performance,True,True
+SCN-109,Ticket Safety,Exact id takes precedence over partial match,System,System,True,Regression,Functional,False,False
+SCN-110,Ticket Safety,Adding an existing dependency stays idempotent,System,Integration,False,Regression,Functional,False,False
+SCN-111,Ticket Safety,Unlinking a non-existent link leaves links empty,System,System,True,Error Handling,Regression,False,False
+SCN-112,Ticket Safety,Listing with no tickets stays empty,System,System,True,Regression,Functional,False,False
+SCN-113,Ticket Safety,Resolve exact id in isolation,Unit,Unit,True,Functional,Functional,True,True
+SCN-114,Ticket Safety,Resolve suffix in isolation,Unit,Unit,True,Functional,Functional,True,True
+SCN-115,Ticket Safety,Resolve ambiguous prefix in isolation,Unit,Unit,True,Error Handling,Error Handling,True,True
+SCN-116,Ticket Safety,Resolve unknown id in isolation,Unit,Unit,True,Error Handling,Error Handling,True,True
+SCN-117,Ticket User Journeys,Create then show works in a normal flow,Acceptance,Acceptance,True,End-to-End,End-to-End,True,True
+SCN-118,Ticket User Journeys,Help works without tickets directory,System,System,True,Functional,Functional,True,True
+SCN-119,Ticket User Journeys,Using TICKETS_DIR works in a normal flow,Acceptance,System,False,End-to-End,Functional,False,False
+SCN-120,Ticket User Journeys,Create then close then list shows closed ticket,Acceptance,Acceptance,True,End-to-End,End-to-End,True,True

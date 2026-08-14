@@ -1,0 +1,121 @@
+scenario_id,scenario_name,n,avg_final_score,valid_rate,avg_warning_count,avg_response_time_seconds
+SCN-001,Exact ID match,5,0.888,1.000,0.000,25.233
+SCN-002,Partial ID match by suffix,5,0.892,1.000,0.000,24.319
+SCN-003,Partial ID match by prefix,5,0.891,1.000,0.000,25.576
+SCN-004,Partial ID match by substring,5,0.891,1.000,0.000,23.513
+SCN-005,Ambiguous ID error,5,0.681,1.000,1.000,36.706
+SCN-006,Non-existent ID error,5,0.830,1.000,1.000,25.974
+SCN-007,Exact match takes precedence,5,0.910,1.000,0.000,32.662
+SCN-008,ID resolution works with status command,5,0.827,1.000,0.800,26.948
+SCN-009,ID resolution works with dep command,5,0.660,1.000,1.600,35.015
+SCN-010,ID resolution works with link command,5,0.866,1.000,0.800,34.351
+SCN-011,Create a basic ticket with name,5,0.804,1.000,1.000,30.013
+SCN-012,Create a ticket with default name,5,0.804,1.000,1.000,32.137
+SCN-013,Create a ticket with description,5,0.852,1.000,0.400,34.183
+SCN-014,Create a ticket with type,5,0.886,1.000,0.000,25.098
+SCN-015,Create a ticket with priority,5,0.864,1.000,0.600,29.032
+SCN-016,Create a ticket with assignee,5,0.852,1.000,0.400,28.688
+SCN-017,Create a ticket with external reference,5,0.809,1.000,1.000,33.196
+SCN-018,Create a ticket with parent,5,0.889,1.000,0.000,24.926
+SCN-019,Create a ticket with design notes,5,0.888,1.000,0.200,32.050
+SCN-020,Create a ticket with acceptance criteria,5,0.913,1.000,0.000,33.142
+SCN-021,Ticket has default status open,5,0.887,1.000,0.000,29.909
+SCN-022,Ticket has default priority 2,5,0.859,1.000,0.200,27.214
+SCN-023,Ticket has default type task,5,0.866,1.000,0.200,28.013
+SCN-024,Ticket has empty deps by default,5,0.883,1.000,0.000,27.791
+SCN-025,Ticket has empty links by default,5,0.867,1.000,0.200,27.667
+SCN-026,Ticket has created timestamp,5,0.826,1.000,0.200,30.091
+SCN-027,Tickets directory created on demand,5,0.743,1.000,1.000,24.845
+SCN-028,Add a dependency,5,0.852,1.000,1.000,39.254
+SCN-029,Add dependency is idempotent,5,0.782,1.000,0.400,33.065
+SCN-030,Remove a dependency,5,0.835,1.000,0.800,41.776
+SCN-031,Remove non-existent dependency,5,0.831,1.000,1.000,35.024
+SCN-032,Add dependency with non-existent ticket,5,0.826,1.000,1.000,34.691
+SCN-033,Add dependency to non-existent ticket,5,0.825,1.000,1.000,35.414
+SCN-034,View dependency tree,5,0.755,1.000,0.800,40.633
+SCN-035,Dependency tree shows status and name,5,0.783,1.000,0.200,42.944
+SCN-036,Dependency tree with multiple children,5,0.887,1.000,0.000,40.672
+SCN-037,Find tickets in current directory,5,0.894,1.000,0.000,24.355
+SCN-038,Find tickets in parent directory,5,0.813,1.000,0.400,33.694
+SCN-039,Find tickets in grandparent directory,5,0.842,0.800,0.200,32.356
+SCN-040,Create ticket initializes in current directory when no parent has tickets,5,0.768,1.000,1.400,39.999
+SCN-041,Error when no tickets directory for read command,5,0.826,1.000,1.000,24.149
+SCN-042,Error when no tickets directory in any parent,5,0.829,1.000,1.000,31.226
+SCN-043,TICKETS_DIR env var takes priority over parent walking,5,0.875,1.000,0.400,33.676
+SCN-044,Show command works from subdirectory,5,0.848,1.000,0.600,28.819
+SCN-045,Dep command works from subdirectory,5,0.839,1.000,0.000,36.302
+SCN-046,Help command works without tickets directory,5,0.887,1.000,0.000,22.952
+SCN-047,Edit in non-TTY mode shows file path,5,0.912,1.000,0.000,28.479
+SCN-048,Edit non-existent ticket,5,0.831,1.000,1.000,26.697
+SCN-049,Edit with partial ID,5,0.889,1.000,0.000,26.084
+SCN-050,Link two tickets,5,0.912,1.000,0.800,44.236
+SCN-051,Link three tickets,5,0.910,1.000,0.600,60.362
+SCN-052,Link is idempotent,5,0.759,1.000,0.600,36.326
+SCN-053,Unlink two tickets,5,0.790,1.000,2.000,60.769
+SCN-054,Unlink non-existent link,5,0.821,1.000,1.000,30.975
+SCN-055,Link with non-existent ticket,5,0.826,1.000,1.000,32.757
+SCN-056,Partial linking adds only new links,5,0.814,1.000,0.000,40.107
+SCN-057,List all tickets,5,0.914,1.000,0.000,35.109
+SCN-058,List with status filter,5,0.911,1.000,0.000,35.808
+SCN-059,List shows dependencies,5,0.882,1.000,0.000,33.273
+SCN-060,List with no tickets returns nothing,5,0.832,1.000,1.000,27.282
+SCN-061,Ready shows tickets with no deps and with closed deps,5,0.824,1.000,0.000,38.082
+SCN-062,Ready excludes tickets with unclosed deps,5,0.903,1.000,0.000,36.675
+SCN-063,Ready shows tickets when deps are closed,5,0.774,1.000,0.000,35.303
+SCN-064,Ready excludes closed tickets,5,0.889,1.000,0.000,27.318
+SCN-065,Blocked shows tickets with unclosed deps,5,0.879,1.000,0.000,36.271
+SCN-066,Blocked excludes tickets with all deps closed,5,0.775,1.000,0.000,39.240
+SCN-067,Blocked excludes closed tickets,5,0.774,1.000,0.000,38.374
+SCN-068,Blocked shows only unclosed blockers,5,0.902,1.000,0.000,48.373
+SCN-069,Closed excludes open tickets,5,0.888,1.000,0.000,24.793
+SCN-070,Add a note to ticket,5,0.850,1.000,1.000,38.873
+SCN-071,Note has timestamp,5,0.878,1.000,0.200,30.906
+SCN-072,Add multiple notes,5,0.941,1.000,0.000,18.443
+SCN-073,Add note to ticket that already has notes section,5,0.880,1.000,0.600,27.622
+SCN-074,Add note with empty string adds timestamp-only note,5,0.857,1.000,0.800,25.920
+SCN-075,Add note to non-existent ticket,5,0.816,1.000,1.200,25.098
+SCN-076,Add note with partial ID,5,0.884,1.000,0.000,28.804
+SCN-077,Query all tickets as JSONL,5,0.890,1.000,0.200,33.561
+SCN-078,Query with jq filter,5,0.876,1.000,0.400,37.675
+SCN-079,Query includes all fields,5,0.856,1.000,0.400,30.173
+SCN-080,Query with no tickets,5,0.833,1.000,1.000,25.681
+SCN-081,Query arrays are JSON arrays,5,0.908,1.000,0.000,33.766
+SCN-082,Show displays ticket content,5,0.915,1.000,0.000,24.935
+SCN-083,Show displays all frontmatter fields,5,0.920,1.000,0.000,28.561
+SCN-084,Show displays blockers section,5,0.896,1.000,0.000,32.213
+SCN-085,Show hides blockers section when all deps closed,5,0.789,1.000,0.000,32.873
+SCN-086,Show displays blocking section,5,0.899,1.000,0.000,30.096
+SCN-087,Show displays children section,5,0.900,1.000,0.000,28.408
+SCN-088,Show displays linked section,5,0.898,1.000,0.000,30.318
+SCN-089,Show enhances parent field with name,5,0.906,1.000,0.000,30.459
+SCN-090,Show non-existent ticket,5,0.831,1.000,1.000,23.350
+SCN-091,Show with partial ID,5,0.890,1.000,0.000,24.341
+SCN-092,Set status to in_progress,5,0.862,1.000,0.800,34.248
+SCN-093,Set status to closed,5,0.863,1.000,0.800,33.065
+SCN-094,Set status to open,5,0.826,1.000,1.000,40.954
+SCN-095,Start command sets status to in_progress,5,0.842,1.000,1.000,31.444
+SCN-096,Close command sets status to closed,5,0.865,1.000,0.800,31.633
+SCN-097,Reopen command sets status to open,5,0.842,1.000,0.800,39.121
+SCN-098,Invalid status value,5,0.865,1.000,1.000,29.487
+SCN-099,Status of non-existent ticket,5,0.832,1.000,1.000,29.504
+SCN-100,Status command with partial ID,5,0.809,1.000,1.200,28.695
+SCN-101,Reject path traversal patterns in ticket id,5,0.775,1.000,1.000,26.458
+SCN-102,Reject absolute paths in ticket id,5,0.636,1.000,3.000,38.524
+SCN-103,Reject suspicious ids in link command,5,0.767,1.000,1.000,31.738
+SCN-104,Help output must not leak environment values,5,0.864,1.000,1.000,32.709
+SCN-105,List completes quickly with many tickets,5,0.855,1.000,0.600,22.815
+SCN-106,Query completes quickly for JSON output,5,0.830,1.000,1.000,23.346
+SCN-107,Dependency tree completes quickly for deep chains,5,0.832,1.000,1.000,23.487
+SCN-108,Show completes quickly for a single ticket,5,0.871,1.000,0.400,25.320
+SCN-109,Exact id takes precedence over partial match,5,0.886,1.000,0.000,26.751
+SCN-110,Adding an existing dependency stays idempotent,5,0.846,1.000,0.000,31.479
+SCN-111,Unlinking a non-existent link leaves links empty,5,0.839,1.000,1.200,39.867
+SCN-112,Listing with no tickets stays empty,5,0.831,1.000,1.000,22.601
+SCN-113,Resolve exact id in isolation,5,0.729,1.000,0.200,24.149
+SCN-114,Resolve suffix in isolation,5,0.711,1.000,0.400,24.092
+SCN-115,Resolve ambiguous prefix in isolation,5,0.703,1.000,1.000,28.487
+SCN-116,Resolve unknown id in isolation,5,0.660,1.000,1.000,26.832
+SCN-117,Create then show works in a normal flow,5,0.876,1.000,0.600,26.686
+SCN-118,Help works without tickets directory,5,0.890,1.000,0.000,25.435
+SCN-119,Using TICKETS_DIR works in a normal flow,5,0.729,1.000,2.800,39.087
+SCN-120,Create then close then list shows closed ticket,5,0.831,1.000,0.800,32.369

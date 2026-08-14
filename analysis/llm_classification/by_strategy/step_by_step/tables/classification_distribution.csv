@@ -1,0 +1,11 @@
+﻿dimension,label,manual_count,llm_count
+test_level,Acceptance,7,2
+test_level,Integration,9,10
+test_level,System,100,102
+test_level,Unit,4,6
+test_type,End-to-End,3,0
+test_type,Error Handling,17,16
+test_type,Functional,89,101
+test_type,Performance,4,3
+test_type,Regression,3,0
+test_type,Security,4,0

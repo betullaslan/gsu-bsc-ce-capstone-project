@@ -1,0 +1,6 @@
+﻿strategy,n,test_level_accuracy,test_type_accuracy,exact_match_accuracy,unknown_level_count,unknown_type_count,unknown_any_count,unknown_any_rate,missing_in_llm_count,missing_in_manual_count
+few_shot,120,0.858,0.917,0.8,0,0,0,0.0,0,0
+step_by_step,120,0.858,0.875,0.75,0,0,0,0.0,0,0
+instruction_based,120,0.817,0.892,0.742,0,0,0,0.0,0,0
+zero_shot,120,0.825,0.858,0.733,0,0,0,0.0,0,0
+constraint,120,0.742,0.867,0.675,0,0,0,0.0,0,0
