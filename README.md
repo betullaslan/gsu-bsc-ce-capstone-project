@@ -21,13 +21,13 @@ The Gherkin scenarios are stored in `data/scenarios.feature`. The `data/` direct
 
 ```text
 .
-├── analysis/     # Analysis reports, tables, and figures
-├── data/         # Scenarios and manual labels
-├── outputs/      # Generated model responses
-├── prompts/      # Prompt templates
-├── scripts/      # Scripts for running the pipeline
-├── src/          # Shared Python code
-├── LICENSE-wedow-ticket.txt   # Original MIT license notice
+├── analysis/      # Analysis reports, tables, and figures
+├── data/          # Scenarios and manual labels
+├── outputs/       # Generated model responses
+├── prompts/       # Prompt templates
+├── scripts/       # Scripts for running the pipeline
+├── src/           # Shared Python code
+├── third_party/   # MIT license notice for wedow/ticket
 └── README.md
 ```
 
