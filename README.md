@@ -12,8 +12,8 @@ The project compares different prompting strategies and evaluates the generated 
 
 The dataset contains **120 test scenarios**:
 
-- **100 scenarios** were taken from the open-source [wedow/ticket](https://github.com/wedow/ticket) project, licensed under the MIT License.
-- **20 scenarios** were written manually to cover test categories missing from the original dataset.
+- **The first 100 scenarios** were taken from the open-source [wedow/ticket](https://github.com/wedow/ticket) project, licensed under the MIT License.
+- **The last 20 scenarios** were written manually to cover test categories missing from the original dataset.
 
 The Gherkin scenarios are stored in `data/scenarios.feature`. The `data/` directory also contains a structured dataset and manual labels used in the analysis.
 
