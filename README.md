@@ -114,3 +114,4 @@ The files in `outputs/` and `analysis/` are generated from the scenarios, prompt
 - wedow. *ticket — Open-source GitHub repository.* [GitHub](https://github.com/wedow/ticket). Accessed May 18, 2026.
 
 The original wedow/ticket project is licensed under the MIT License. See [LICENSE-wedow-ticket.txt](third_party/LICENSE-wedow-ticket.txt).
+
